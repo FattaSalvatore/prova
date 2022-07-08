@@ -22,6 +22,15 @@ public class Users {
 		return prst.execute();
 	}
 	
+
+	public boolean DeleteUser(String cf) throws SQLException {
+		PreparedStatement prst = this.con.prepareStatement("DELETE FROM test1_users WHERE cf = ?");
+		prst.setString(1, cf);
+		int i = 0;
+		return prst.execute();
+	}
+	
+
 	public ResultSet SelectUser(String cf) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement("Select * from test1_users WHERE cf = ?");
 		prst.setString(1, cf);
