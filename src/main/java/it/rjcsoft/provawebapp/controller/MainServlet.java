@@ -1,6 +1,8 @@
 package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,10 @@ public class MainServlet extends HttpServlet {
     public MainServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    
+    public void init(ServletConfig config) throws ServletException {
     }
 
 	/**
