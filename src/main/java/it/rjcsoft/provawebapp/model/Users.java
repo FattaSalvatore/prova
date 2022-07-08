@@ -25,6 +25,7 @@ public class Users {
 	public boolean DeleteUser(String cf) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement("DELETE FROM test1_users WHERE cf = ?");
 		prst.setString(1, cf);
+		int i = 0;
 		return prst.execute();
 	}
 	
