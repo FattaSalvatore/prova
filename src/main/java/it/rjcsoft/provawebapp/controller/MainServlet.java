@@ -1,6 +1,7 @@
 package it.rjcsoft.provawebapp.controller;
 
 
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -29,7 +30,9 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 
+
+		response.getWriter().append("Served at: ");
+
 	}
 
 	/**
