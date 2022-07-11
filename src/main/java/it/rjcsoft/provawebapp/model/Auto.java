@@ -9,14 +9,14 @@ public class Auto {
 	private String modello;
 	private String targa;
 	private int proprietario;
-	private double prezzo_auto;
+	private String prezzo_auto;
 	private Date datarevisione;
 	private Timestamp inizio_polizza;
 	private Timestamp fine_polizza;
 	
 	
 	
-	public Auto(int id, String marca, String modello, String targa, int proprietario, double prezzo_auto,
+	public Auto(int id, String marca, String modello, String targa, int proprietario, String prezzo_auto,
 			Date datarevisione, Timestamp inizio_polizza, Timestamp fine_polizza) {
 		super();
 		this.id = id;
@@ -60,10 +60,10 @@ public class Auto {
 	public void setProprietario(int proprietario) {
 		this.proprietario = proprietario;
 	}
-	public double getPrezzo_auto() {
+	public String getPrezzo_auto() {
 		return prezzo_auto;
 	}
-	public void setPrezzo_auto(double prezzo_auto) {
+	public void setPrezzo_auto(String prezzo_auto) {
 		this.prezzo_auto = prezzo_auto;
 	}
 	public Date getDatarevisione() {

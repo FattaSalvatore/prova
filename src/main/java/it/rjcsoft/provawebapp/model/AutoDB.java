@@ -58,19 +58,19 @@ public class AutoDB {
 	}
 	
 	/* Select di Auto */
-	public List SelectAuto(int limit, int offset) throws SQLException {
+	public ArrayList<Auto> SelectAuto(int limit, int offset) throws SQLException {
+		List<Auto> vp=new ArrayList<Auto>();
 
-		List<Auto> vp = new ArrayList<Auto>();
-		int i=0;
 		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAutoLimitOffset))  //Preparazione dello statement
 		{
 		prst.setInt(1, limit);
 		prst.setInt(2, offset);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
-		while(rs.next() && i<offset) {
-			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getDouble("prezzo_auto"),rs.getDate("data_revisione"),rs.getTimestamp("inizio_polizza"),rs.getTimestamp("fine_polizza")));
-			i++;
+		while(rs.next()) {
+			System.out.println("RISULTATO ID"+rs.getInt("id"));
+			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getString("prezzo_auto"),rs.getDate("datarevisione"),rs.getTimestamp("inizio_polizza"),rs.getTimestamp("fine_polizza")));
+		
 		}
 			
 		}catch(Exception e) {
