@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<c:forEach items="${Lista}" var="a">
+	<h1>Ciao</h1>
+	<c:forEach var="a" items="${Lista}">
 
         <div class="content">
             <div class="content-body">

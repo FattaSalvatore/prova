@@ -22,7 +22,7 @@ import it.rjcsoft.provawebapp.model.DBdriver;
  * Servlet implementation class Servlet
  */
 
-@WebServlet("/Servlet")
+@WebServlet("/MainServlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,8 @@ public class Servlet extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		AutoDB auto = new AutoDB(conn);
-		String Pagename=request.getParameter("Pagename");
+		
+		String Pagename = null;
 		if(Pagename==null) {
 			Pagename="FILEJSP";
 			Pagename= "/WEB-INF/"+Pagename+".jsp";
