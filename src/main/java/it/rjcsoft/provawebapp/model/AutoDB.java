@@ -4,16 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 
-public class Auto {
+
+public class AutoDB {
 	private Connection con;
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
 	private String QueryDeleteAuto="DELETE FROM test1_auto WHERE targa = ?";
 	private String QuerySelectAuto="Select * from test1_auto WHERE id = ?";
 	private String QuerySelectAutoLimitOffset="Select * from test1_auto LIMIT ? OFFSET ?";
 	private String QueryUpdateAuto="Update test1_auto set  proprietario=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
-	public Auto(Connection con) {
+	public AutoDB(Connection con) {
 		this.con = con;
 	}
 	
@@ -51,16 +58,26 @@ public class Auto {
 	}
 	
 	/* Select di Auto */
-	public ResultSet SelectAuto(int limit, int offset) throws SQLException {
-		PreparedStatement prst = this.con.prepareStatement(QuerySelectAutoLimitOffset); //Preparazione dello statement
+	public List SelectAuto(int limit, int offset) throws SQLException {
+
+		List<Auto> vp=new ArrayList<Auto>();
+		int i=0;
+		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAutoLimitOffset))  //Preparazione dello statement
+		{
 		prst.setInt(1, limit);
 		prst.setInt(2, offset);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
-		if(!rs.next()) {
-			rs = null;
+		while(rs.next() && i<offset) {
+			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getDouble("prezzo_auto"),rs.getDate("data_revisione"),rs.getTimestamp("inizio_polizza"),rs.getTimestamp("fine_polizza")));
+			i++;
 		}
-		return rs; //return della select (ritorna la classe ResultSet)
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return vp;
+		
 	}
 	
 	public ResultSet UpdateAuto(String owner, String carPrice, String revisionDate, String startInsurancePolicy, String endInsurancePolicy, int id ) throws SQLException {

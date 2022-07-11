@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class Users {
+public class UsersDB {
 	private Connection con;
 	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select * from test1_users WHERE id = ?";
 	private String QueryUpdateUser="Update test1_user set nome=?, cf=? where id=?";
-	public Users(Connection con) {
+	public UsersDB(Connection con) {
 		this.con = con;
 	}
 	

@@ -2,21 +2,24 @@ package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import it.rjcsoft.provawebapp.model.Auto;
+import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
 
 /**
  * Servlet implementation class Servlet
  */
+
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,14 +38,24 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
-		Auto auto = new Auto(conn);
-		try {
-			ResultSet rs = auto.SelectAuto(10,1);
-			response.getWriter().append(rs.getString(1));
-		} catch (SQLException e) {
+		AutoDB auto = new AutoDB(conn);
+		String Pagename=request.getParameter("Pagename");
+		if(Pagename==null) {
+			Pagename="FILEJSP";
+			Pagename= "/WEB-INF/"+Pagename+".jsp";
 			
-			e.printStackTrace();
+			try {
+				List<Auto> va = auto.SelectAuto(10,1);
+				request.setAttribute("Auto", va);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
 		}
+		 RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+		 disp.forward(request,response);
+		
 	}
 
 	/**
