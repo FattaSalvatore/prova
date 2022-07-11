@@ -60,7 +60,7 @@ public class AutoDB {
 	/* Select di Auto */
 	public List SelectAuto(int limit, int offset) throws SQLException {
 
-		List<Auto> vp=new ArrayList<Auto>();
+		List<Auto> vp = new ArrayList<Auto>();
 		int i=0;
 		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAutoLimitOffset))  //Preparazione dello statement
 		{
