@@ -1,30 +1,23 @@
 package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.rjcsoft.provawebapp.model.Auto;
-import it.rjcsoft.provawebapp.model.DBdriver;
-
 /**
- * Servlet implementation class Servlet
+ * Servlet implementation class dfsdf
  */
-@WebServlet("/Servlet")
-public class Servlet extends HttpServlet {
+@WebServlet("/dfsdf")
+public class dfsdf extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet() {
+    public dfsdf() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +26,8 @@ public class Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DBdriver db = DBdriver.getInstance();
-		Connection conn = db.openConnection();
-		Auto auto = new Auto(conn);
-		try {
-			ResultSet rs = auto.SelectAuto(10,1);
-			response.getWriter().append(rs.getString(1));
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

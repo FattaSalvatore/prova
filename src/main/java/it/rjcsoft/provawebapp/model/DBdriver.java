@@ -12,8 +12,8 @@ public class DBdriver {
 		String driverString = "jdbc:postgresql://sviluppo.rjcsoft.it/test";
 
 		try {
-			Connection conn = DriverManager.getConnection(driverString);
-			Class.forName(driverString).getDeclaredConstructor().newInstance();
+			Connection conn = DriverManager.getConnection(driverString,"test_user","!$Av2kkm#KCnJFen2$57rjc");
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
