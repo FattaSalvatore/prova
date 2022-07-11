@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import it.rjcsoft.provawebapp.model.Auto;
@@ -45,8 +47,8 @@ public class Servlet extends HttpServlet {
 			Pagename= "/WEB-INF/"+Pagename+".jsp";
 			
 			try {
-				List<Auto> va = auto.SelectAuto(10,1);
-				request.setAttribute("Auto", va);
+				ArrayList<Auto> va = auto.SelectAuto(10,1);
+				request.setAttribute("Lista", va);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
