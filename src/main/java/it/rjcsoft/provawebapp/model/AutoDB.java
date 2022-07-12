@@ -15,11 +15,24 @@ import java.sql.Date;
 
 public class AutoDB {
 	private Connection con;
+	
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
 	private String QueryDeleteAuto="DELETE FROM test1_auto WHERE targa = ?";
 	private String QuerySelectAuto="Select * from test1_auto WHERE id = ?";
 	private String QuerySelectAutoLimitOffset="Select * from test1_auto LIMIT ? OFFSET ?";
 	private String QueryUpdateAuto="Update test1_auto set  proprietario=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
+	
+	private String id="id";
+	private String marca="marca";
+	private String modello="modello";
+	private String targa="targa";
+	private String proprietario="proprietario";
+	private String prezzo_auto="prezzo_auto";
+	private String datarevisione="datarevisione";
+	private String inizio_polizza="inizio_polizza";
+	private String fine_polizza="fine_polizza";
+	
+	
 	public AutoDB(Connection con) {
 		this.con = con;
 	}
@@ -69,7 +82,7 @@ public class AutoDB {
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
-			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getString("prezzo_auto"),rs.getDate("datarevisione"),rs.getTimestamp("inizio_polizza"),rs.getTimestamp("fine_polizza")));
+			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
 			

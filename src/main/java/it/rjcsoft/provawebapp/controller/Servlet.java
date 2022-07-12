@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.rjcsoft.provawebapp.model.Auto;
-import it.rjcsoft.provawebapp.model.AutoDB;
-import it.rjcsoft.provawebapp.model.DBdriver;
+import it.rjcsoft.provawebapp.model.*;
+
 
 /**
  * Servlet implementation class Servlet
@@ -25,7 +24,7 @@ import it.rjcsoft.provawebapp.model.DBdriver;
 @WebServlet("/MainServlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final String Pagename= "/WEB-INF/FILEJSP.jsp"; 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,21 +40,22 @@ public class Servlet extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		AutoDB auto = new AutoDB(conn);
+		UsersDB user= new UsersDB(conn);
 		
-		String Pagename = null;
-		if(Pagename==null) {
-			Pagename="FILEJSP";
-			Pagename= "/WEB-INF/"+Pagename+".jsp";
+		
+		
+		try {
+			ArrayList<Auto> va = auto.SelectAuto(10,1);
+			request.setAttribute("Lista", va);
 			
-			try {
-				ArrayList<Auto> va = auto.SelectAuto(10,1);
-				request.setAttribute("Lista", va);
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
+			ArrayList<User> au = user.SelectUserLimitOffset(10,1);
+			request.setAttribute("PersonaLista", au);
+		} catch (SQLException e) {
 			
+			e.printStackTrace();
 		}
+		
+	
 		 RequestDispatcher disp = request.getRequestDispatcher (Pagename);
 		 disp.forward(request,response);
 		

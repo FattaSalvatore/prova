@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UsersDB {
@@ -12,6 +14,14 @@ public class UsersDB {
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select * from test1_users WHERE id = ?";
 	private String QueryUpdateUser="Update test1_user set nome=?, cf=? where id=?";
+	private String QuerySelectUserLimitOffset="Select * from test1_user LIMIT ? OFFSET ?";
+	
+	private String id="id";
+	private String nome="nome";
+	private String cognome="cognome";
+	private String cf="cf";
+	private String datanascita="datanascita";
+	
 	public UsersDB(Connection con) {
 		this.con = con;
 	}
@@ -56,6 +66,28 @@ public class UsersDB {
 			rs = null;
 		}
 		return rs;
+		
+	}
+	
+	public ArrayList<User> SelectUserLimitOffset(int limit, int offset){
+		List<User> lu=new ArrayList<User>();
+		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectUserLimitOffset))  //Preparazione dello statement
+		{
+		prst.setInt(1, limit);
+		prst.setInt(2, offset);
+		prst.execute();
+		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
+		while(rs.next()) {
+			System.out.println("RISULTATO ID"+rs.getInt("id"));
+			lu.add(new User(rs.getInt(id),rs.getString(nome),rs.getString(cognome),rs.getString(cf),rs.getDate(datanascita)));
+		
+		}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return (ArrayList<User>) lu;
+	
 		
 	}
 }
