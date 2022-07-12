@@ -69,7 +69,7 @@ public class AutoDB {
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
-			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getString("prezzo_auto"),rs.getDate("datarevisione"),rs.getTimestamp("inizio_polizza"),rs.getTimestamp("fine_polizza")));
+			vp.add(new Auto(rs.getInt("id"),rs.getString("marca"),rs.getString("modello"),rs.getString("targa"),rs.getInt("proprietario"),rs.getString("prezzo_auto"),rs.getDate("datarevisione")));
 		
 		}
 			

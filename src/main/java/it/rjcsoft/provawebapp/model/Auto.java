@@ -1,6 +1,5 @@
 package it.rjcsoft.provawebapp.model;
 
-import java.sql.Timestamp;
 import java.sql.Date;
 
 public class Auto {
@@ -11,13 +10,11 @@ public class Auto {
 	private int proprietario;
 	private String prezzo_auto;
 	private Date datarevisione;
-	private Timestamp inizio_polizza;
-	private Timestamp fine_polizza;
 	
 	
 	
 	public Auto(int id, String marca, String modello, String targa, int proprietario, String prezzo_auto,
-			Date datarevisione, Timestamp inizio_polizza, Timestamp fine_polizza) {
+			Date datarevisione) {
 		super();
 		this.id = id;
 		this.marca = marca;
@@ -26,8 +23,6 @@ public class Auto {
 		this.proprietario = proprietario;
 		this.prezzo_auto = prezzo_auto;
 		this.datarevisione = datarevisione;
-		this.inizio_polizza = inizio_polizza;
-		this.fine_polizza = fine_polizza;
 	}
 	
 	public int getId() {
@@ -72,18 +67,7 @@ public class Auto {
 	public void setDatarevisione(Date datarevisione) {
 		this.datarevisione = datarevisione;
 	}
-	public Timestamp getInizio_polizza() {
-		return inizio_polizza;
-	}
-	public void setInizio_polizza(Timestamp inizio_polizza) {
-		this.inizio_polizza = inizio_polizza;
-	}
-	public Timestamp getFine_polizza() {
-		return fine_polizza;
-	}
-	public void setFine_polizza(Timestamp fine_polizza) {
-		this.fine_polizza = fine_polizza;
-	}
+
 	
 	
 	
