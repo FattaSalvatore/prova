@@ -11,6 +11,7 @@ public class Auto {
     private Date datarevisione;
     private Timestamp inizio_polizza;
     private Timestamp fine_polizza;
+    
     public Auto(int id, String marca, String modello, String targa, int proprietario, String prezzo_auto,
             Date datarevisione, Timestamp inizio_polizza, Timestamp fine_polizza) {
         super();
