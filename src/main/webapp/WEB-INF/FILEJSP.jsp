@@ -34,7 +34,7 @@ table {
     border-collapse: collapse;
     margin-bottom: 3em;
     width: 100%;
-    background: #fff;
+    background:#f0f8ff;
 }
 td, th {
     padding: 0.75em 1.5em;
@@ -42,7 +42,7 @@ td, th {
 }
 	td.err {
 		background-color: #e992b9;
-		color: #fff;
+		color:#f0f8ff;
 		font-size: 0.75em;
 		text-align: center;
 		line-height: 1;
@@ -110,9 +110,8 @@ td.user-name {
 	overflow-y: auto;
 	max-height: 50vh;
 }
-
-
 </style>
+
 <center>
 	<h1>Tabella Auto</h1>
 	<table>
@@ -142,6 +141,28 @@ td.user-name {
     	</c:forEach>
 	</table>
 	</center>
-
+	
+	<center>
+	<h1>Tabella User</h1>
+	<table>
+		<tr>
+			<th>id</th>
+			<th>nome</th>
+			<th>cognome</th>
+			<th>cf</th>
+			<th>datanascita</th>
+		</tr>
+		<c:forEach var="p" items="${PersonaLista}">
+		<tr>
+			<td>${p.id}</td> 
+    		<td>${p.nome}</td>
+    		<td>${p.cognome}</td>
+    		<td>${p.cf}</td>
+    		<td>${p.datanascita}</td>
+    	</tr>
+    	</c:forEach>
+	</table>
+	</center>
+	
 </body>
 </html>
