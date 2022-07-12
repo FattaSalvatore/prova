@@ -24,8 +24,8 @@ import it.rjcsoft.provawebapp.model.DBdriver;
 
 @WebServlet("/MainServlet")
 public class Servlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,39 +34,39 @@ public class Servlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DBdriver db = DBdriver.getInstance();
-		Connection conn = db.openConnection();
-		AutoDB auto = new AutoDB(conn);
-		
-		String Pagename = null;
-		if(Pagename==null) {
-			Pagename="FILEJSP";
-			Pagename= "/WEB-INF/"+Pagename+".jsp";
-			
-			try {
-				ArrayList<Auto> va = auto.SelectAuto(10,1);
-				request.setAttribute("Lista", va);
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
-			
-		}
-		 RequestDispatcher disp = request.getRequestDispatcher (Pagename);
-		 disp.forward(request,response);
-		
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBdriver db = DBdriver.getInstance();
+        Connection conn = db.openConnection();
+        AutoDB auto = new AutoDB(conn);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        String Pagename = null;
+        if(Pagename==null) {
+            Pagename="FILEJSP";
+            Pagename= "/WEB-INF/"+Pagename+".jsp";
+
+            try {
+                ArrayList<Auto> va = auto.SelectAuto(10,1);
+                request.setAttribute("Lista", va);
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+            }
+
+        }
+         RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+         disp.forward(request,response);
+
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

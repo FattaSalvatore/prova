@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,8 +136,8 @@ td.user-name {
     		<td>${a.proprietario}</td>
     		<td>${a.prezzo_auto}</td>
     		<td>${a.datarevisione}</td>
-    		<td>${a.inizio_polizza}</td>
-    		<td>${a.fine_polizza}</td>
+    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
+            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
     	</tr>
     	</c:forEach>
 	</table>
