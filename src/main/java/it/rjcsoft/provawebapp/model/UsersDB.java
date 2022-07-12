@@ -13,8 +13,8 @@ public class UsersDB {
 	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select * from test1_users WHERE id = ?";
-	private String QueryUpdateUser="Update test1_user set nome=?, cf=? where id=?";
-	private String QuerySelectUserLimitOffset="Select * from test1_user LIMIT ? OFFSET ?";
+	private String QueryUpdateUser="Update test1_users set nome=?, cf=? where id=?";
+	private String QuerySelectUserLimitOffset="Select * from test1_users LIMIT ? OFFSET ?";
 	
 	private String id="id";
 	private String nome="nome";
