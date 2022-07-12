@@ -241,7 +241,7 @@ textarea {
 
 	<h1>Tabella inserimento Auto</h1>
 
-	<form method="POST" action="/FormAutoServlet" style="width:30%; margin-left: 32%">
+	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%; margin-left: 32%">
 		<label for="idMarca">Marca</label><br>
 		<input id="idMarca" name="marca" type="text"><br><br>
 		<label for="idModello">Modello</label><br>
@@ -270,8 +270,8 @@ textarea {
 		<input id="idFinePolizza" name="f_polizza" type="text"><br><br>
 		
 		<input type="submit" class="button-30" style="width: 100%" value="Invia"><br><br>
-		<a href="/Provawebapp/Home"><button class="button-30" style="width: 100%" role="button">Torna alla Home</button></a>
 	</form>
+	<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Home"><button class="button-30" style="width: 100%; margin-bottom: 20vh;" role="button">Torna alla Home</button></a></div>
 	
 
 <style>
