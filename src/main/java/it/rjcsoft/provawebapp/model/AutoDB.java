@@ -1,5 +1,4 @@
 package it.rjcsoft.provawebapp.model;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +9,8 @@ import java.util.List;
 import java.util.Vector;
 import java.sql.Timestamp;
 import java.sql.Date;
-
-
-
 public class AutoDB {
+
 	private Connection con;
 	
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
@@ -109,3 +106,4 @@ public class AutoDB {
 		return rs; //return dell'update (ritorna la classe ResultSet)
 	}
 }
+
