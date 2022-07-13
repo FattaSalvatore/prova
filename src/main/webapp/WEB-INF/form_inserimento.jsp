@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="../WEB-INF/style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Form Inserimento</title>
 </head>
@@ -240,8 +241,14 @@ textarea {
 </style>
 
 	<h1>Tabella inserimento Auto</h1>
+	
 
-	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%; margin-left: 32%">
+      <c:if test = "${Error == 'Ciao'}">
+         <div style="display: flex; justify-content: center; width: auto"><p>Errore nell'inserimento dati</p></div>
+      </c:if>
+	
+	<div style="display: flex; justify-content: center; width: auto">
+	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
 		<label for="idMarca">Marca</label><br>
 		<input id="idMarca" name="marca" type="text"><br><br>
 		<label for="idModello">Modello</label><br>
@@ -271,6 +278,7 @@ textarea {
 		
 		<input type="submit" class="button-30" style="width: 100%" value="Invia"><br><br>
 	</form>
+	</div>
 	<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Home"><button class="button-30" style="width: 100%; margin-bottom: 20vh;" role="button">Torna alla Home</button></a></div>
 	
 

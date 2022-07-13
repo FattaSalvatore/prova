@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
+import it.rjcsoft.provawebapp.model.User;
+import it.rjcsoft.provawebapp.model.UsersDB;
 
 /**
  * Servlet implementation class FormAutoServlet
@@ -22,7 +25,7 @@ import it.rjcsoft.provawebapp.model.DBdriver;
 @WebServlet("/FormAutoServlet")
 public class FormAutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String Pagename= "/inserimento"; 
+	private static final String Pagename= "/WEB-INF/form_inserimento.jsp"; 
 	private static final String Pagename2= "/Servlet";
        
     /**
@@ -68,9 +71,14 @@ public class FormAutoServlet extends HttpServlet {
  	       datarevisione==null || datarevisione.isEmpty() ||
  	       inizio_polizza==null || inizio_polizza.isEmpty() ||
  	       fine_polizza==null || fine_polizza.isEmpty()) {
+
+			UsersDB user = new UsersDB(conn);
+			
+			ArrayList<User> users = user.SelectUserLimitOffset(10,1);
+			request.setAttribute("proprietari", users);
 	    	
-	    	request.setAttribute("Error", "Ciao");
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+	    	request.setAttribute("Error", "Ciao");
 			disp.forward(request,response);
 	    }else {
 	    	marca=marca.trim();
@@ -84,14 +92,14 @@ public class FormAutoServlet extends HttpServlet {
 		    
 		    try {
 		    	
-				auto.InsertAuto(marca, modello, proprietario, prezzo_auto, inizio_polizza, datarevisione, targa, fine_polizza);
+				auto.InsertAuto(marca, modello, targa, Integer.parseInt(proprietario), Double.parseDouble(prezzo_auto), datarevisione, inizio_polizza, fine_polizza);
 			
 		    } catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		    
-		    RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+		    RequestDispatcher disp = request.getRequestDispatcher (Pagename2);
 			disp.forward(request,response);
 	    }
 	    
