@@ -98,8 +98,15 @@ public class FormAutoServlet extends HttpServlet {
 		    fine_polizza=fine_polizza.trim();
 		    Date datarevisione_cast=null;
 		    RequestDispatcher disp=null;
-		   boolean problem=false;
-		   int proprietario_casted=0;
+		   
+		    boolean problem=false;
+		   
+		    int proprietario_casted=0;
+		   
+		    double prezzo_auto_casted=0;
+		    
+		    Timestamp inizio_polizza_cast=null;
+		    Timestamp fine_polizza_cast=null;
 		    try {
 		    	
 		        datarevisione_cast=StringToDate(datarevisione);
@@ -109,13 +116,11 @@ public class FormAutoServlet extends HttpServlet {
 		    	problem=true;
 			}  
 		    
-		    Timestamp inizio_polizza_cast=null;
-		   
-		    Timestamp fine_polizza_cast=null;
+		    
 		    
 		    try {
 		    	
-
+		    	inizio_polizza=inizio_polizza+" 00:00:00.0";
 		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -123,7 +128,7 @@ public class FormAutoServlet extends HttpServlet {
 		    	problem=true;
 			}
 		    try {
-		    	
+		    	fine_polizza=fine_polizza+" 23:59:59.999";
 		    	fine_polizza_cast=StringToTimestamp(fine_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -139,11 +144,19 @@ public class FormAutoServlet extends HttpServlet {
 		    	problem=true;
 		    }
 		    
-		  
+		    
+		    try
+		    {
+		    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
+		    }
+		    catch(NumberFormatException e)
+		    {
+		      //not a double
+		    }
 		    
 		    try {
 		    			
-				auto.InsertAuto(marca, modello, targa,proprietario_casted ,Double.parseDouble(prezzo_auto),  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+				auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
 
 			
 		    } catch (SQLException e) {
@@ -180,10 +193,10 @@ public class FormAutoServlet extends HttpServlet {
 	
 	private Timestamp StringToTimestamp(String ToBeConverted)throws ParseException {
 		System.out.println("FUNZIONE TIMESTAMP");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		
 		Calendar parsedDate=Calendar.getInstance();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 		parsedDate.setTime(sdf.parse(ToBeConverted));
 			
 		
