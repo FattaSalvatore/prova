@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.rjcsoft.provawebapp.model.DBdriver;
+import it.rjcsoft.provawebapp.model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -48,15 +50,20 @@ public class LoginServlet extends HttpServlet {
 		        PreparedStatement prst = conn.prepareStatement("SELECT * FROM test1_credenziali WHERE email = ?");
 		        prst.setString(1, email);
 		        ResultSet rs = prst.executeQuery();
-		    
+		        User utente=null;
 				byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
 				String decodedString = new String(decodedBytes);
 				if(decodedString.equals(pwd)) {
-					
+					 
+			        HttpSession session = request.getSession(true);
+			        session.setAttribute("user",utente);
+					   
 				}
 		        
 		 }catch(Exception e) {
-			 
+			e.printStackTrace(); 
+		 }finally {
+			 db.closeConnection(conn);
 		 }
 		
 	}
