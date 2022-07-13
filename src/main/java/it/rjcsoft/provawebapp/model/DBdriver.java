@@ -39,6 +39,9 @@ public class DBdriver {
 		try {
 			conn.close();
 		} catch (Exception ex) {
+			
+		}finally {
+			
 		}
 	}
 }
