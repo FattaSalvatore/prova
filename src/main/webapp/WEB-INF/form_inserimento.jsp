@@ -243,7 +243,7 @@ textarea {
 	<h1>Tabella inserimento Auto</h1>
 	
 
-      <c:if test = "${Error == 'Ciao'}">
+      <c:if test = "${Error != null}">
          <div style="display: flex; justify-content: center; width: auto"><p>Errore nell'inserimento dati</p></div>
       </c:if>
 	
