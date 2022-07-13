@@ -196,32 +196,32 @@ textarea {
 	
 	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
 	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
-		<label for="idMarca">Marca</label><br>
+		<label for="idMarca">Marca:</label><br>
 		<input id="idMarca" name="marca" type="text"><br><br>
-		<label for="idModello">Modello</label><br>
+		<label for="idModello">Modello:</label><br>
 		<input id="idModello" name="modello" type="text"><br><br>
-		<label for="idTarga">Targa</label><br>
+		<label for="idTarga">Targa:</label><br>
 		<input id="idTarga" name="targa" type="text"><br><br>
 		
 		
-		<label for="idProprietario">Proprietario</label><br>
+		<label for="idProprietario">Proprietario:</label><br>
 		<select id="idProprietario" name="proprietario">
 			<option value='0'">Luca</option>
 			<option value='1'">Andrea</option>
 			<option value='2'">Giovanni</option>
 		</select><br><br>
 		
-		<label for="idPrezzo">Prezzo</label><br>
+		<label for="idPrezzo">Prezzo:</label><br>
 		<input id="idPrezzo" name="prezzo" type="text"><br><br>
 		
-		<label for="idRevisione">Revisione</label><br>
+		<label for="idRevisione">Revisione:</label><br>
 		 <br><input type="date" id="revisione" name="revisione"  value="yyyy-mm-dd"><br><br>
 		<br>
-		<label for="idInizioPolizza">Inizio Polizza</label><br>
+		<label for="idInizioPolizza">Inizio Polizza:</label><br>
 		<br><input type="date" id="i_polizza" name="i_polizza"  value="yyyy-mm-dd"><br><br>
 		<br>
 		
-		<label for="idFinePolizza">Fine Polizza</label><br>
+		<label for="idFinePolizza">Fine Polizza:</label><br>
 		<br><input type="date" id="f_polizza" name="f_polizza"  value="yyyy-mm-dd"><br><br>
 		<br><br><br>
 		

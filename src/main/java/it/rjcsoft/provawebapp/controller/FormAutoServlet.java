@@ -84,7 +84,7 @@ public class FormAutoServlet extends HttpServlet {
 			request.setAttribute("proprietari", users);
 	    	
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
-	    	request.setAttribute("Error", "Errore nell'inserimento dati");
+	    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
 			disp.forward(request,response);
 	    }else {
 	    	
