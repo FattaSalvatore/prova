@@ -49,8 +49,10 @@ public class LoginServlet extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		RequestDispatcher disp=null;
+		/*
 		try {
 		       	UsersDB userdb=new UsersDB(conn);
+		      
 		        User utente=null;
 				byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
 				String decodedString = new String(decodedBytes);
@@ -70,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 		 }finally {
 			 db.closeConnection(conn);
 		 }
-		
+		*/
 	}
 
 }
