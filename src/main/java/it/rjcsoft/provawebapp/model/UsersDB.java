@@ -14,7 +14,7 @@ public class UsersDB {
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select tu.id, tu.nome, tu.cognome, tu.cf, tu.datanascita, tr.ruolo from test1_users tu JOIN test1_roles tr ON tr.id=tu.ruolo_id";
 	private String QueryUpdateUser="Update test1_users set nome=?, cf=? where id=?";
-	private String QuerySelectUserLimitOffset="Select tu.id, tu.nome, tu.cognome, tu.cf, tu.datanascita, tr.ruolo from test1_users tu JOIN test1_roles tr ON tr.id=tu.ruolo_id LIMIT ? OFFSET ?";
+	private String QuerySelectUserLimitOffset="Select tu.id, tu.nome, tu.cognome, tu.cf, tu.datanascita, tr.ruolo from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.id = tu.id LIMIT ? OFFSET ?";
 	
 	private String id="id";
 	private String nome="nome";
