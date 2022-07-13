@@ -1,11 +1,18 @@
 package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Base64;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import it.rjcsoft.provawebapp.model.DBdriver;
 
 /**
  * Servlet implementation class LoginServlet
@@ -36,6 +43,25 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		String email=request.getParameter("email");
+		String pwd=request.getParameter("pwd");
+		DBdriver db = DBdriver.getInstance();
+		Connection conn = db.openConnection();
+		try {
+		        PreparedStatement pst = conn.prepareStatement("SELECT * FROM test1_credenziali WHERE email= '"+email+"'");
+
+		        ResultSet rs = pst.executeQuery();
+		    
+				byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
+				String decodedString = new String(decodedBytes);
+				if(decodedString.equals(pwd)) {
+					
+				}
+		        
+		 }catch(Exception e) {
+			 
+		 }
+		
 	}
 
 }
