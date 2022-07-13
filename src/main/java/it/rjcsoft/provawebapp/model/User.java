@@ -10,18 +10,19 @@ public class User {
 	private String cognome;
 	private String cf;
 	private Date datanascita;
-	private int ruolo;
+	private String ruolo;
 	
-	public User(int id, String email, String pwd, String nome, String cognome, String cf, Date datanascita, int ruolo) {
+	public User(int id, String email, String pwd, String ruolo, String nome, String cognome, String cf, Date datanascita) {
 		super();
 		this.id = id;
+		this.email=email;
+		this.pwd=pwd;
+		this.ruolo=ruolo;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.cf = cf;
 		this.datanascita = datanascita;
-		this.email=email;
-		this.pwd=pwd;
-		this.ruolo=ruolo;
+
 	}
 	
 	public String getEmail() {
@@ -40,11 +41,11 @@ public class User {
 		this.pwd = pwd;
 	}
 
-	public int getRuolo() {
+	public String getRuolo() {
 		return ruolo;
 	}
 
-	public void setRuolo(int ruolo) {
+	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
 
