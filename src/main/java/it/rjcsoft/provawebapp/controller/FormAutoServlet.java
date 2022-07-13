@@ -98,9 +98,8 @@ public class FormAutoServlet extends HttpServlet {
 		    fine_polizza=fine_polizza.trim();
 		    Date datarevisione_cast=null;
 		    RequestDispatcher disp=null;
-		   
-		    boolean problem=false;
-		   
+		    String errori=null;
+		    
 		    int proprietario_casted=0;
 		   
 		    double prezzo_auto_casted=0;
@@ -112,11 +111,9 @@ public class FormAutoServlet extends HttpServlet {
 		        datarevisione_cast=StringToDate(datarevisione);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
-		    	request.setAttribute("Error", "Formato data revisione errato deve essere: yyyy-MM-dd");
-		    	problem=true;
+		    	errori+="Formato data revisione errato deve essere: yyyy-MM-dd \n";
+		    	
 			}  
-		    
-		    
 		    
 		    try {
 		    	
@@ -124,23 +121,22 @@ public class FormAutoServlet extends HttpServlet {
 		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
-		    	problem=true;
+		    	errori+="Formato data inizio polizza errato deve essere: yyyy-MM-dd \n";
 			}
+		    
 		    try {
 		    	fine_polizza=fine_polizza+" 23:59:59.999";
 		    	fine_polizza_cast=StringToTimestamp(fine_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
-
-		    	problem=true;
+		    	errori+="Formato data fine polizza errato deve essere: yyyy-MM-dd \n";
 			}
 		    
 		  
 		    try {
 		    	 proprietario_casted= Integer.parseInt(proprietario);
 		    } catch (NumberFormatException nfe) {
-
-		    	problem=true;
+		    	errori+="Numero non intero \n";
 		    }
 		    
 		    
@@ -148,20 +144,20 @@ public class FormAutoServlet extends HttpServlet {
 		    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
 		    }
 		    catch(NumberFormatException e){
-		    	problem=true;
+		    	errori+="Numero non double \n";
 		    }
 		    
 		    try {
 		    			
 				auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
 
-			
 		    } catch (SQLException e) {
 				// TODO Auto-generated catch block
-				problem=true;
+		    	errori+="Dati non insriti \n";
 			}
-		    if(problem==true) {
-		    	request.setAttribute("Error", "Errore nell'inserimento dei dati");
+		    
+		    if(errori!=null) {
+		    	request.setAttribute("Error", errori);
 		    	disp = request.getRequestDispatcher (Pagename);
 				
 		    }else {
