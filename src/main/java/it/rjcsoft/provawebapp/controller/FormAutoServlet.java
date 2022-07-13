@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,14 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
 
+
 /**
  * Servlet implementation class FormAutoServlet
  */
 @WebServlet("/FormAutoServlet")
 public class FormAutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String Pagename= "/inserimento"; 
-	private static final String Pagename2= "/Servlet";
+	private static final String Pagename= "/Inserimento"; 
+	private static final String Pagename2= "/S";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -73,6 +77,7 @@ public class FormAutoServlet extends HttpServlet {
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
 			disp.forward(request,response);
 	    }else {
+	    	
 	    	marca=marca.trim();
 		    modello=modello.trim();
 		    targa=targa.trim();
@@ -81,24 +86,86 @@ public class FormAutoServlet extends HttpServlet {
 		    datarevisione=datarevisione.trim();
 		    inizio_polizza=inizio_polizza.trim();
 		    fine_polizza=fine_polizza.trim();
-		    
+		    Date datarevisione_cast=null;
+		    RequestDispatcher disp=null;
+		   boolean problem=false;
 		    try {
 		    	
-				auto.InsertAuto(marca, modello, proprietario, prezzo_auto, inizio_polizza, datarevisione, targa, fine_polizza);
+		        datarevisione_cast=StringToDate(datarevisione);
+		    } catch (ParseException e) {
+				// TODO Auto-generated catch block
+		    	request.setAttribute("Error", "Formato data revisione errato deve essere: yyyy-MM-dd");
+		    	problem=true;
+			}  
+		    
+		    Timestamp inizio_polizza_cast=null;
+		   
+		    Timestamp fine_polizza_cast=null;
+		    try {
+		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
+		    	fine_polizza_cast=StringToTimestamp(fine_polizza);
+		    } catch (ParseException e) {
+				// TODO Auto-generated catch block
+		    	request.setAttribute("Error", "errore nella formattazione dei dati nel campo fine polizza o inizio polizza");
+		    	problem=true;
+			}
+		    
+		    int proprietario_casted=0;
+		    try {
+		    	 proprietario_casted= Integer.parseInt(proprietario);
+		    } catch (NumberFormatException nfe) {
+		    	request.setAttribute("Error", "Numero non intero");
+		    	problem=true;
+		    }
+		    
+		  
+		    
+		    try {
+		    			
+				auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
 			
 		    } catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				problem=true;
+				request.setAttribute("Error", "Dati non inseriti");
 			}
+		    if(problem==true) {
+		    	disp = request.getRequestDispatcher (Pagename);
+				
+		    }else {
+		    	disp = request.getRequestDispatcher (Pagename2);
+		    }
 		    
-		    RequestDispatcher disp = request.getRequestDispatcher (Pagename);
 			disp.forward(request,response);
 	    }
 	    
-	    
-	    
-	
-	    
+	       
 	}
-
+	
+	private Date StringToDate(String ToBeConverted)throws  ParseException{
+		System.out.println("FUNZIONE DATE");
+		java.util.Date date_casted=null; 
+		Date dateSql=null;
+		
+			
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+		date_casted=sdf.parse(ToBeConverted);
+		dateSql=new Date(date_casted.getTime());
+		
+		return dateSql;
+		
+	}
+	
+	private Timestamp StringToTimestamp(String ToBeConverted)throws ParseException {
+		System.out.println("FUNZIONE TIMESTAMP");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		Calendar parsedDate=Calendar.getInstance();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		parsedDate.setTime(sdf.parse(ToBeConverted));
+			
+		
+	    Timestamp timestamp_casted = new java.sql.Timestamp(parsedDate.getTimeInMillis());
+	    return timestamp_casted;
+	}
 }

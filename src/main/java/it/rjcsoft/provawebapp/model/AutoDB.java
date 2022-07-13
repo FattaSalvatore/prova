@@ -35,16 +35,16 @@ public class AutoDB {
 	}
 	
 	/* Inserimento di Auto */
-	public boolean InsertAuto(String brand, String model, String l_Plate, String owner, String carPrice, String revisionDate, String startInsurancePolicy, String endInsurancePolicy ) throws SQLException {
+	public boolean InsertAuto(String brand, String model, String l_Plate, int owner, String carPrice, Date revisionDate, Timestamp startInsurancePolicy, Timestamp endInsurancePolicy ) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertAuto); //Preparazione dello statement
 		prst.setString(1, brand);
 		prst.setString(2, model);
 		prst.setString(3, l_Plate);
-		prst.setString(4, owner);
+		prst.setInt(4, owner);
 		prst.setString(5, carPrice);
-		prst.setString(6, revisionDate);
-		prst.setString(7, startInsurancePolicy);
-		prst.setString(8, endInsurancePolicy);
+		prst.setDate(6, revisionDate);
+		prst.setTimestamp(7, startInsurancePolicy);
+		prst.setTimestamp(8, endInsurancePolicy);
 		return prst.execute(); //esecuzione dello statement (ritorna true se andato a buon fine)
 	}
 	
