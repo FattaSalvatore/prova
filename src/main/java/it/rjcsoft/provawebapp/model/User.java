@@ -11,6 +11,7 @@ public class User {
 	private Date datanascita;
 	private String ruolo;
 	
+
 	public User(int id, String nome, String cognome, String cf, Date datanascita, String ruolo) {
 		super();
 		this.id = id;
@@ -24,13 +25,14 @@ public class User {
 	public User(int id, String email, String pwd, String nome, String cognome, String cf, Date datanascita, String ruolo) {
 		super();
 		this.id = id;
+		this.email=email;
+		this.pwd=pwd;
+		this.ruolo=ruolo;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.cf = cf;
 		this.datanascita = datanascita;
-		this.email=email;
-		this.pwd=pwd;
-		this.ruolo=ruolo;
+
 	}
 	
 	public String getEmail() {
