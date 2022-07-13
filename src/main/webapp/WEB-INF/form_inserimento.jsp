@@ -6,46 +6,23 @@
 <head>
 <link href="../WEB-INF/style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>Form Inserimento</title>
+<title> Inserisci Auto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
 <style>
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-
-html {
-  font-family: 'Montserrat', Arial, sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-background: #A1FFCE;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
-
-button {
-  overflow: visible;
-}
-
-button, select {
-  text-transform: none;
-}
 
 button, input, select, textarea {
   color: #5A5A5A;
-  font: inherit;
   margin: 0;
 }
 
 input {
   line-height: normal;
-}
-
-textarea {
-  overflow: auto;
 }
 
 #container {
@@ -56,17 +33,13 @@ textarea {
 }
 
 form {
-  padding: 37.5px;
-  margin: 50px 0;
+  margin: 5px 0;
 }
 
 h1 {
-  color: #474544;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 7px;
+  padding: 50px;
   text-align: center;
-  text-transform: uppercase;
+  letter-spacing: 10px
 }
 
 .underline {
@@ -131,13 +104,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	width: 45%;
 }
 
-select {
-  background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-32.png') no-repeat right;
-  outline: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
 select::-ms-expand {
   display: none;
 }
@@ -173,25 +139,6 @@ textarea {
 
 :-ms-input-placeholder {
 	color: #474544;
-}
-
-#form_button {
-  background: none;
-  border: solid 2px #474544;
-  color: #474544;
-  cursor: pointer;
-  display: inline-block;
-  font-family: 'Helvetica', Arial, sans-serif;
-  font-size: 0.875em;
-  font-weight: bold;
-  outline: none;
-  padding: 20px 35px;
-  text-transform: uppercase;
-  -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-ms-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
 }
 
 #form_button:hover {
@@ -240,14 +187,14 @@ textarea {
 }
 </style>
 
-	<h1>Tabella inserimento Auto</h1>
+	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
 	
 
       <c:if test = "${Error != null}">
          <div style="display: flex; justify-content: center; width: auto"><p>Errore nell'inserimento dati</p></div>
       </c:if>
 	
-	<div style="display: flex; justify-content: center; width: auto">
+	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
 	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
 		<label for="idMarca">Marca</label><br>
 		<input id="idMarca" name="marca" type="text"><br><br>
@@ -275,59 +222,26 @@ textarea {
 		
 		<label for="idFinePolizza">Fine Polizza</label><br>
 		<input id="idFinePolizza" name="f_polizza" type="text"><br><br>
-		
-		<input type="submit" class="button-30" style="width: 100%" value="Invia"><br><br>
+	<center>
+		<input type="submit" class="button-30" style="width: 20%" value="Invia"><br><br>
+	</center>
 	</form>
 	</div>
-	<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Home"><button class="button-30" style="width: 100%; margin-bottom: 20vh;" role="button">Torna alla Home</button></a></div>
-	
-
-<style>
-/* CSS */
-.button-30 {
-  align-items: center;
-  appearance: none;
-  background-color: #FCFCFD;
-  border-radius: 4px;
-  border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #36395A;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 48px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow,transform;
-  font-size: 18px;
-}
-
-.button-30:focus {
-  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-}
-
-.button-30:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.button-30:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
-  transform: translateY(2px);
-}</style>
+	<div class="w3-opacity" >
+		<form action="/Provawebapp/Home">
+			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Home"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Torna alla Home</button></a></div>
+		</form>
+	</div>
+	<br><br>
+	<footer class="w3-container w3-padding-64 w3-green w3-center w3-large"> 
+	  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+	  <i class="fa fa-instagram w3-hover-opacity"></i>
+	  <i class="fa fa-snapchat w3-hover-opacity"></i>
+	  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+	  <i class="fa fa-twitter w3-hover-opacity"></i>
+	  <i class="fa fa-linkedin w3-hover-opacity"></i>
+	  <p>Created by <a>rjc soft</a></p>
+	</footer>
 
 </body>
 </html>
