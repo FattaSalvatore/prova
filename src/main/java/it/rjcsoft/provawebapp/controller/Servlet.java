@@ -24,7 +24,7 @@ import it.rjcsoft.provawebapp.model.*;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-    private static final String Pagename= "/WEB-INF/FILEJSP.jsp"; 
+    private static final String Pagename= "/WEB-INF/visualizza.jsp"; 
 
     /**
      * @see HttpServlet#HttpServlet()
