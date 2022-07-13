@@ -1,5 +1,4 @@
 package it.rjcsoft.provawebapp.model;
-
 import java.sql.Date;
 
 public class User {
