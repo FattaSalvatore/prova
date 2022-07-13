@@ -76,7 +76,7 @@ public class FormAutoServlet extends HttpServlet {
  	       prezzo_auto==null || prezzo_auto.isEmpty() ||
  	       datarevisione==null || datarevisione.isEmpty() ||
  	       inizio_polizza==null || inizio_polizza.isEmpty() ||
- 	       fine_polizza==null || fine_polizza.isEmpty()) {
+ 	       fine_polizza==null || fine_polizza.isEmpty()){
 
 			UsersDB user = new UsersDB(conn);
 			
