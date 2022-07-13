@@ -101,8 +101,17 @@ public class FormAutoServlet extends HttpServlet {
 		    Timestamp inizio_polizza_cast=null;
 		   
 		    Timestamp fine_polizza_cast=null;
+		    
 		    try {
+		    	
 		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
+		    } catch (ParseException e) {
+				// TODO Auto-generated catch block
+		    	request.setAttribute("Error", "errore nella formattazione dei dati nel campo fine polizza o inizio polizza");
+		    	problem=true;
+			}
+		    try {
+		    	
 		    	fine_polizza_cast=StringToTimestamp(fine_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -158,10 +167,10 @@ public class FormAutoServlet extends HttpServlet {
 	
 	private Timestamp StringToTimestamp(String ToBeConverted)throws ParseException {
 		System.out.println("FUNZIONE TIMESTAMP");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Calendar parsedDate=Calendar.getInstance();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		parsedDate.setTime(sdf.parse(ToBeConverted));
 			
 		
