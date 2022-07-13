@@ -1,21 +1,64 @@
 package it.rjcsoft.provawebapp.model;
-
 import java.sql.Date;
 
 public class User {
 	private int id;
 	private String nome;
+	private String email;
+	private String pwd;
 	private String cognome;
 	private String cf;
 	private Date datanascita;
-	public User(int id, String nome, String cognome, String cf, Date datanascita) {
+	private String ruolo;
+	
+
+	public User(int id, String nome, String cognome, String cf, Date datanascita, String ruolo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.cf = cf;
 		this.datanascita = datanascita;
+		this.ruolo=ruolo;
 	}
+	
+	public User(int id, String email, String pwd, String nome, String cognome, String cf, Date datanascita, String ruolo) {
+		super();
+		this.id = id;
+		this.email=email;
+		this.pwd=pwd;
+		this.ruolo=ruolo;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.cf = cf;
+		this.datanascita = datanascita;
+
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+
 	public int getId() {
 		return id;
 	}

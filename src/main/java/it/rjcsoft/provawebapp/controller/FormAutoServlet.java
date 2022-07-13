@@ -30,7 +30,7 @@ import it.rjcsoft.provawebapp.model.UsersDB;
 public class FormAutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String Pagename= "/Inserimento"; 
+	private static final String Pagename= "/WEB-INF/error.jsp"; 
 	private static final String Pagename2= "/Servlet";
 
        
@@ -84,7 +84,7 @@ public class FormAutoServlet extends HttpServlet {
 			request.setAttribute("proprietari", users);
 	    	
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
-	    	request.setAttribute("Error", "Ciao");
+	    	request.setAttribute("Error", "Errore nell'inserimento dati");
 			disp.forward(request,response);
 	    }else {
 	    	
@@ -124,7 +124,6 @@ public class FormAutoServlet extends HttpServlet {
 		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
-		    	request.setAttribute("Error", "errore nella formattazione dei dati nel campo fine polizza o inizio polizza");
 		    	problem=true;
 			}
 		    try {
@@ -132,7 +131,7 @@ public class FormAutoServlet extends HttpServlet {
 		    	fine_polizza_cast=StringToTimestamp(fine_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
-		    	request.setAttribute("Error", "errore nella formattazione dei dati nel campo fine polizza o inizio polizza");
+
 		    	problem=true;
 			}
 		    
@@ -140,18 +139,16 @@ public class FormAutoServlet extends HttpServlet {
 		    try {
 		    	 proprietario_casted= Integer.parseInt(proprietario);
 		    } catch (NumberFormatException nfe) {
-		    	request.setAttribute("Error", "Numero non intero");
+
 		    	problem=true;
 		    }
 		    
 		    
-		    try
-		    {
+		    try{
 		    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
 		    }
-		    catch(NumberFormatException e)
-		    {
-		      //not a double
+		    catch(NumberFormatException e){
+		    	problem=true;
 		    }
 		    
 		    try {
@@ -162,9 +159,9 @@ public class FormAutoServlet extends HttpServlet {
 		    } catch (SQLException e) {
 				// TODO Auto-generated catch block
 				problem=true;
-				request.setAttribute("Error", "Dati non inseriti");
 			}
 		    if(problem==true) {
+		    	request.setAttribute("Error", "Errore nell'inserimento dei dati");
 		    	disp = request.getRequestDispatcher (Pagename);
 				
 		    }else {
