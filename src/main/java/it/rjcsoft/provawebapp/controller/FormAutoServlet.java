@@ -145,13 +145,12 @@ public class FormAutoServlet extends HttpServlet {
 		    }
 		    
 		    
-		    try
-		    {
+		    try{
 		    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
 		    }
-		    catch(NumberFormatException e)
-		    {
-		      //not a double
+		    catch(NumberFormatException e){
+		    	request.setAttribute("Error", "Numero non double");
+		    	problem=true;
 		    }
 		    
 		    try {
