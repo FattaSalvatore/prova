@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
+import it.rjcsoft.provawebapp.model.User;
+import it.rjcsoft.provawebapp.model.UsersDB;
 
 
 /**
@@ -26,8 +29,10 @@ import it.rjcsoft.provawebapp.model.DBdriver;
 @WebServlet("/FormAutoServlet")
 public class FormAutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	private static final String Pagename= "/Inserimento"; 
-	private static final String Pagename2= "/S";
+	private static final String Pagename2= "/Servlet";
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -72,9 +77,14 @@ public class FormAutoServlet extends HttpServlet {
  	       datarevisione==null || datarevisione.isEmpty() ||
  	       inizio_polizza==null || inizio_polizza.isEmpty() ||
  	       fine_polizza==null || fine_polizza.isEmpty()) {
+
+			UsersDB user = new UsersDB(conn);
+			
+			ArrayList<User> users = user.SelectUserLimitOffset(10,1);
+			request.setAttribute("proprietari", users);
 	    	
-	    	request.setAttribute("Error", "Ciao");
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+	    	request.setAttribute("Error", "Ciao");
 			disp.forward(request,response);
 	    }else {
 	    	
@@ -89,6 +99,7 @@ public class FormAutoServlet extends HttpServlet {
 		    Date datarevisione_cast=null;
 		    RequestDispatcher disp=null;
 		   boolean problem=false;
+		   int proprietario_casted=0;
 		    try {
 		    	
 		        datarevisione_cast=StringToDate(datarevisione);
@@ -104,6 +115,7 @@ public class FormAutoServlet extends HttpServlet {
 		    
 		    try {
 		    	
+
 		    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
 		    } catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -119,7 +131,7 @@ public class FormAutoServlet extends HttpServlet {
 		    	problem=true;
 			}
 		    
-		    int proprietario_casted=0;
+		  
 		    try {
 		    	 proprietario_casted= Integer.parseInt(proprietario);
 		    } catch (NumberFormatException nfe) {
@@ -131,7 +143,8 @@ public class FormAutoServlet extends HttpServlet {
 		    
 		    try {
 		    			
-				auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+				auto.InsertAuto(marca, modello, targa,proprietario_casted ,Double.parseDouble(prezzo_auto),  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+
 			
 		    } catch (SQLException e) {
 				// TODO Auto-generated catch block

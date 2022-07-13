@@ -21,7 +21,7 @@ import it.rjcsoft.provawebapp.model.UsersDB;
 /**
  * Servlet implementation class Home
  */
-@WebServlet({"/","/Home"})
+@WebServlet({"/Home"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String Pagename = "/WEB-INF/homePage.jsp";
