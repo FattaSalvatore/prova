@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<header class="w3-panel w3-center w3-opacity" style="padding:80px 14px">
+<header class="w3-panel w3-center w3-opacity" style="padding:60px 14px">
   <h1 class="w3-xlarge" style="color: red">Errore</h1>
   <h3 class="w3-xlarge">${Error }</h3>
 
