@@ -12,13 +12,21 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<h1 class="w3-xlarge" style="color: red">Errore:</h1>
-	<p>${Error }</p>
+<header class="w3-panel w3-center w3-opacity" style="padding:80px 14px">
+  <h1 class="w3-xlarge" style="color: red">Errore</h1>
+  <h3 class="w3-xlarge">${Error }</h3>
+
+</header>
 	<div class="w3-opacity" >
 		<form action="/Provawebapp/Home">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Home"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Torna alla Home</button></a></div>
 		</form>
 	</div>
+	  <div class="w3-padding-32">
+      	
+  </div>  <div class="w3-padding-32">
+      	
+  </div>
 	<br><br>
 	<footer class="w3-container w3-padding-64 w3-red w3-center w3-large"> 
 	  <i class="fa fa-facebook-official w3-hover-opacity"></i>
