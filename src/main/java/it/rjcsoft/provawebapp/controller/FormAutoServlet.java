@@ -63,7 +63,7 @@ public class FormAutoServlet extends HttpServlet {
 		
 		String error="";
 		
-		RequestDispatcher disp = null;
+		 RequestDispatcher disp = null;
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();

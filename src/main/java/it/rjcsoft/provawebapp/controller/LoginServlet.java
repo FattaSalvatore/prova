@@ -78,7 +78,8 @@ public class LoginServlet extends HttpServlet {
 						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
 						System.out.println("Login confermato");
 						if(dbinput.equals(encodedString)) {
-							
+							System.out.println(email);
+							System.out.println(pwd);
 							utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
 					        HttpSession session = request.getSession(true);
 					        System.out.println("Login confermato");
