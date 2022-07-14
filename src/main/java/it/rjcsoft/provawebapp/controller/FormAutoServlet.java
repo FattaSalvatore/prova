@@ -70,7 +70,7 @@ public class FormAutoServlet extends HttpServlet {
 		 System.out.println(ruolo);
 		 if(ruolo.equals("Admin")) {
 			request.setAttribute("ruolo",ruolo);
-			disp=request.getRequestDispatcher(errorPage);
+			disp=request.getRequestDispatcher(homePage);
 		 
 			    AutoDB auto = new AutoDB(conn);
 			    
