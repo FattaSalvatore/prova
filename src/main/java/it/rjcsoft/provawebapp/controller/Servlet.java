@@ -69,17 +69,15 @@ public class Servlet extends HttpServlet {
 		
 		 }else if(ruolo.equals("Guest")){
 			 User utente=(User) session.getAttribute("user");
-			 AutoDB dba=null;
 			 try {
+				 System.out.println(utente.getId());
 				 ArrayList<Auto> va=auto.SelectAuto(utente.getId());
 				 request.setAttribute("Lista",va); 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			 
-			
-			 request.setAttribute("PersonaLista", utente);
+		 
 		 }
 		
 		 disp = request.getRequestDispatcher (Pagename);

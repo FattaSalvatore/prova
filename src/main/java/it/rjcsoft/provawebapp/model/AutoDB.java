@@ -63,10 +63,12 @@ public class AutoDB {
 		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAuto))  //Preparazione dello statement
 		{
 		prst.setInt(1, id);
+		System.out.println("id input: "+id);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
+			System.out.println(rs.getString(modello));
 			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
@@ -89,6 +91,7 @@ public class AutoDB {
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
+			
 			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
