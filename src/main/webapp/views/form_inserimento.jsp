@@ -119,10 +119,27 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 		<br><br>
 		
 		<div style="display: flex; justify-content: center; width: auto">
-			<input type="submit" class="button-40" onClick="window.alert('stai per inserire i dati, premi ok per continuare')"><br></br><br>
+			<input type="submit" class="button-40" onClick="confirmAction()"><br></br><br>
+					<script>
+						//funzione aler
+				      function confirmAction() {
+				        let confirmAction = confirm("Sei sicuro di voler inserire questa vettura?");
+				        if (confirmAction) {
+				        	//true
+				          alert("premi ok per confermare");
+				        } else {
+				        	//false
+				        	alert("Hai annullato l'inserimento della vettura");
+				        	//killo il processo della form
+			        	    event.preventDefault();
+				        	
+				        }
+				      }
+				    </script>
 				<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
 					<input type="reset" class="button-40" >
 				</div>
+
 		</div>
 	</form>
 	</div>
