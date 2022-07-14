@@ -9,7 +9,7 @@ public class CredenzialiDB {
 	private Connection con;
 	private String QueryInsertCredenziali="Insert into test1_credenziali (email,pwd,ruolo) VALUES (?,?,?)";
 	private String QueryDeleteCredenziali="DELETE FROM test1_credenziali WHERE email = ?";
-	private String QuerySelectCredenziali="Select * from test1_credenzialiauto WHERE email = ?";
+	private String QuerySelectCredenziali="Select * from test1_credenziali WHERE email = ?";
 	private String QueryUpdateCredenziali="Update test1_credenziali set  email=?, pwd=?, ruolo=? where email=?";
 	
 	public CredenzialiDB(Connection con) {
