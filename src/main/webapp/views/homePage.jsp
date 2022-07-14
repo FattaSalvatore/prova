@@ -30,6 +30,9 @@
 		<form action="/Provawebapp/Inserimento">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento</button></a></div>
 		</form>
+			<form action="./views/login.jsp">
+			<div style="display: flex; justify-content: center; width: auto"><a href="./views/login.jsp"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
+		</form>
   </div>
 </header>
   
