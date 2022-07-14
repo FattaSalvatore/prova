@@ -5,12 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../WEB-INF/style.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Autenticazione</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
-	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -64,7 +63,6 @@ input[type='text'], [type='email'], select, textarea {
 	letter-spacing: 1px;
 	margin: 0em 0 1.875em 0;
 	padding: 0 0 0.875em 0;
-	text-transform: uppercase;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -88,7 +86,7 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color: #6666ff">AUTENTICAZIONE</h1>
 	
 	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
-	<form action="/Provawebapp/Login" method="POST">
+	<form method="POST" action="/Provawebapp/Login">
 
 		<label for="idEmail">Email:</label> 
 		<input id="idEmail" type="email" name="email"> 
@@ -122,21 +120,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 			</div>
 	</form>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<footer class="w3-container w3-padding-64 w3-center w3-large" style="background-color: #6666ff"> 
-	  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-	  <i class="fa fa-instagram w3-hover-opacity"></i>
-	  <i class="fa fa-snapchat w3-hover-opacity"></i>
-	  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-	  <i class="fa fa-twitter w3-hover-opacity"></i>
-	  <i class="fa fa-linkedin w3-hover-opacity"></i>
-	  <p>Created by <a>rjc soft</a></p>
-	</footer>
-
 </body>
 </html>
 	
