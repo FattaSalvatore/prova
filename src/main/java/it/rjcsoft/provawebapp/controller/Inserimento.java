@@ -39,15 +39,17 @@ public class Inserimento extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		UsersDB user = new UsersDB(conn);
-		
+		//Arraylist menù a tendina form
 		ArrayList<User> users = null;
 			try {
 				users = user.selectAllUsers();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				db.closeConnection(conn);
 			}
-		request.setAttribute("proprietari", users);
+			request.setAttribute("proprietari", users);
 		
 		
 		

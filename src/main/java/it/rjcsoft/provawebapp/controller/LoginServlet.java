@@ -65,7 +65,8 @@ public class LoginServlet extends HttpServlet {
 						String dbinput = rs.getString("pwd");
 						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
 						if(dbinput.equals(encodedString)) {
-							 
+							
+							utente = new User(rs.getInt("id"),rs.getString("email"),rs.getString("pwd"),rs.getString("nome"),rs.getString("cognome"),rs.getString("cf"),rs.getDate("datanascita"),rs.getString("ruolo")); 
 					        HttpSession session = request.getSession(true);
 					        session.setAttribute("user",utente);
 					        disp = request.getRequestDispatcher (Pagename2);

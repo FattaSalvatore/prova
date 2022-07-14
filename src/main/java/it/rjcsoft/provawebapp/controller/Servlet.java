@@ -55,6 +55,8 @@ public class Servlet extends HttpServlet {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		}finally {
+			db.closeConnection(conn);
 		}
 		
 	
