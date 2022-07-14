@@ -14,7 +14,7 @@
 <body>
 
 	<h2 class="w3-xlarge w3-xlargecolor">Login</h2>
-	<form action="/Login" method="POST">
+	<form action="./Login" method="POST">
 	
 		<label for="idEmail">Email</label>
 		<input id="idEmail" type="email" name="email">
