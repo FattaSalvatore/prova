@@ -97,7 +97,7 @@ public class LoginServlet extends HttpServlet {
 				    	disp = request.getRequestDispatcher (Pagename);
 			       	}
 					
-					disp.forward(request,response);
+					
 				        
 			        
 			 }catch(Exception e) {
@@ -106,9 +106,12 @@ public class LoginServlet extends HttpServlet {
 				 db.closeConnection(conn);
 			 }
 		}else {
-			db.closeConnection(conn);
+			request.setAttribute("Error", error);
+	    	disp = request.getRequestDispatcher (Pagename);
+			
 		}
-		
+		db.closeConnection(conn);
+		disp.forward(request,response);
 		
 	}
 

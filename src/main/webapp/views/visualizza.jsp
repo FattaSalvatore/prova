@@ -66,28 +66,30 @@
 					</center>
 					<br><br>
 					
-					<center>
-					<th>
-					<h1>Tabella User</h1>
-					<table class="w3-table-all w3-centered" style="width:60%">
-						<tr>
-							<th>ID</th>
-							<th>Nome</th>
-							<th>Cognome</th>
-							<th>CodiceFiscale</th>
-							<th>Data di Nascita</th>
-						</tr>
-						<c:forEach var="p" items="${PersonaLista}">
-						<tr>
-							<td>${p.id}</td> 
-				    		<td>${p.nome}</td>
-				    		<td>${p.cognome}</td>
-				    		<td>${p.cf}</td>
-				    		<td>${p.datanascita}</td>
-				    	</tr>
-				    	</c:forEach>
-					</table>
-					</center>
+					<c:if test="${ruolo == 'Admin' }">
+						<center>
+						<th>
+						<h1>Tabella User</h1>
+						<table class="w3-table-all w3-centered" style="width:60%">
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Cognome</th>
+								<th>CodiceFiscale</th>
+								<th>Data di Nascita</th>
+							</tr>
+							<c:forEach var="p" items="${PersonaLista}">
+							<tr>
+								<td>${p.id}</td> 
+					    		<td>${p.nome}</td>
+					    		<td>${p.cognome}</td>
+					    		<td>${p.cf}</td>
+					    		<td>${p.datanascita}</td>
+					    	</tr>
+					    	</c:forEach>
+						</table>
+						</center>
+					</c:if>
 	<br></br>			
 	
 			<header class="w3-panel w3-center w3-opacity" style="padding:5px 5px">	
