@@ -12,15 +12,16 @@ public class UsersDB {
 	private Connection con;
 	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
-	private String QuerySelectUser="Select tu.id, tu.nome, tu.cognome, tu.cf, tu.datanascita, tr.ruolo from test1_users tu JOIN test1_roles tr ON tr.id=tu.ruolo_id";
+	private String QuerySelectUser="Select * from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.id = tu.id WHERE id = ?";
 	private String QueryUpdateUser="Update test1_users set nome=?, cf=? where id=?";
-	private String QuerySelectUserLimitOffset="Select tu.id, tu.nome, tu.cognome, tu.cf, tu.datanascita, tr.ruolo from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.id = tu.id LIMIT ? OFFSET ?";
+	private String QuerySelectAllUsers="Select * from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.id = tu.id";
 	
 	private String id="id";
 	private String nome="nome";
 	private String cognome="cognome";
 	private String cf="cf";
 	private String datanascita="datanascita";
+	private String ruolo="ruolo";
 	
 	public UsersDB(Connection con) {
 		this.con = con;
@@ -69,23 +70,17 @@ public class UsersDB {
 		
 	}
 	
-	public ArrayList<User> SelectUserLimitOffset(int limit, int offset){
+	public ArrayList<User> selectAllUsers() throws SQLException{
 		List<User> lu=new ArrayList<User>();
-		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectUserLimitOffset))  //Preparazione dello statement
-		{
-		prst.setInt(1, limit);
-		prst.setInt(2, offset);
+		PreparedStatement prst = this.con.prepareStatement(QuerySelectAllUsers);  //Preparazione dello statement
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
-			lu.add(new User(rs.getInt(id),rs.getString(nome),rs.getString(cognome),rs.getString(cf),rs.getDate(datanascita), rs.getString("ruolo")));
+			lu.add(new User(rs.getInt(id),rs.getString(nome),rs.getString(cognome),rs.getString(cf),rs.getDate(datanascita), rs.getString(ruolo)));
 		
 		}
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		return (ArrayList<User>) lu;
 	
 		

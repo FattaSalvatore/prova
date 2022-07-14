@@ -50,7 +50,7 @@ public class Servlet extends HttpServlet {
 			ArrayList<Auto> va = auto.SelectAuto(10,0);
 			request.setAttribute("Lista", va);
 			
-			ArrayList<User> au = user.SelectUserLimitOffset(10,0);
+			ArrayList<User> au = user.selectAllUsers();
 			request.setAttribute("PersonaLista", au);
 		} catch (SQLException e) {
 			
