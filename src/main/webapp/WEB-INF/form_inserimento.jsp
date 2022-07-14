@@ -205,12 +205,8 @@ textarea {
 		
 		
 		<label for="idProprietario">Proprietario:</label><br>
-		<select id="idProprietario" name="proprietario">
-			<option value='0'">Luca</option>
-			<option value='1'">Andrea</option>
-			<option value='2'">Giovanni</option>
-		</select><br><br>
-		
+		<input id="proprietario" name="proprietario" type="text">
+		<br><br>
 		<label for="idPrezzo">Prezzo:</label><br>
 		<input id="idPrezzo" name="prezzo" type="text"><br><br>
 		
