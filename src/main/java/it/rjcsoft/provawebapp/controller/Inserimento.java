@@ -67,7 +67,7 @@ public class Inserimento extends HttpServlet {
 		 }
 		
 		
-		
+		db.closeConnection(conn);
 		disp.forward(request,response);
 	}
 

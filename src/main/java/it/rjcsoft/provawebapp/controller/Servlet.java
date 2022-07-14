@@ -76,10 +76,12 @@ public class Servlet extends HttpServlet {
 				 request.setAttribute("Lista",va); 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				db.closeConnection(conn);
 			}
 		 
 		 }
-		
+		 db.closeConnection(conn);
 		 disp = request.getRequestDispatcher (Pagename);
 		 disp.forward(request,response);
 		
