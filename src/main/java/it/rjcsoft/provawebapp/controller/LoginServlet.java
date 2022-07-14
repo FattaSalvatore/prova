@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 					        disp = request.getRequestDispatcher (Pagename2);
 					    
 						}else {
-							error="Account inesistentePassword non corretta";
+							error="Password non corretta";
 				       		request.setAttribute("Error", error);
 					    	disp = request.getRequestDispatcher (Pagename);
 						}
