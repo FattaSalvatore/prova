@@ -25,7 +25,8 @@ import it.rjcsoft.provawebapp.model.UsersDB;
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String Pagename2= "/Home";   
+	private static final String Pagename2= "/Home";
+	private static final String Pagename= "/views/error.jsp"; 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		String email=request.getParameter("email");
 		String pwd=request.getParameter("pwd");
 		DBdriver db = DBdriver.getInstance();
@@ -53,31 +54,45 @@ public class LoginServlet extends HttpServlet {
         User utente=null;
         CredenzialiDB credenziali= new CredenzialiDB(conn);
         ResultSet rs=null;
+		String error="";
+		if(email==null || email.isEmpty() || pwd==null || pwd.isEmpty()) {
 		
-		try {
-			 	
-				rs= credenziali.SelectCredenziali(email);
-		       	if(rs!=null) {
-		       		byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
-					String decodedString = new String(decodedBytes);
+			try {
+				 	
+					rs= credenziali.SelectCredenziali(email);
+			       	if(rs!=null) {
+						
+						String dbinput = rs.getString("pwd");
+						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
+						if(dbinput.equals(encodedString)) {
+							 
+					        HttpSession session = request.getSession(true);
+					        session.setAttribute("user",utente);
+					        disp = request.getRequestDispatcher (Pagename2);
+					    
+						}else {
+							error="Account inesistentePassword non corretta";
+				       		request.setAttribute("Error", error);
+					    	disp = request.getRequestDispatcher (Pagename);
+						}
+			       	}else {
+			       		error="Account inesistente";
+			       		request.setAttribute("Error", error);
+				    	disp = request.getRequestDispatcher (Pagename);
+			       	}
 					
-					if(decodedString.equals(pwd)) {
-						 
-				        HttpSession session = request.getSession(true);
-				        session.setAttribute("user",utente);
-				        disp = request.getRequestDispatcher (Pagename2);
-				    
-					}
-		       	}
-				
-				disp.forward(request,response);
+					disp.forward(request,response);
+				        
 			        
-		        
-		 }catch(Exception e) {
-			e.printStackTrace(); 
-		 }finally {
-			 db.closeConnection(conn);
-		 }
+			 }catch(Exception e) {
+				e.printStackTrace(); 
+			 }finally {
+				 db.closeConnection(conn);
+			 }
+		}else {
+			db.closeConnection(conn);
+		}
+		
 		
 	}
 
