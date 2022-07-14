@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 		
 			try {
 				 	
-					rs= credenziali.SelectCredenziali(email);
+					rs= credenziali.selectCredenziali(email);
 			       	if(rs!=null) {
 						
 						String dbinput = rs.getString("pwd");
