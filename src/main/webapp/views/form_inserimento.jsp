@@ -139,7 +139,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 				<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
 					<input type="reset" class="button-40" >
 				</div>
-
 		</div>
 	</form>
 	</div>
