@@ -15,12 +15,9 @@
 </head>
 <body>
 
-<<<<<<< HEAD
+
 <h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
-=======
-	
-	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
->>>>>>> e15a9c30c1dcc8820bb8b7e4b83f1b488b2b78c3
+
 	
 
       <c:if test = "${Error != null}">
