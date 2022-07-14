@@ -15,7 +15,7 @@ public class AutoDB {
 	
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
 	private String QueryDeleteAuto="DELETE FROM test1_auto WHERE targa = ?";
-	private String QuerySelectAuto="Select * from test1_auto WHERE id = ?";
+	private String QuerySelectAuto="Select * from test1_auto WHERE proprietario = ?";
 	private String QuerySelectAutoLimitOffset="Select * from test1_auto LIMIT ? OFFSET ?";
 	private String QueryUpdateAuto="Update test1_auto set  proprietario=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
 	
@@ -69,7 +69,7 @@ public class AutoDB {
 		while(rs.next()) {
 			System.out.println("RISULTATO ID"+rs.getInt("id"));
 			System.out.println(rs.getString(modello));
-			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
+			vp.add(new Auto(rs.getInt("id"),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
 			
@@ -80,7 +80,7 @@ public class AutoDB {
 	}
 	
 	/* Select di Auto */
-	public ArrayList<Auto> SelectAuto(int limit, int offset) throws SQLException {
+	public ArrayList<Auto> SelectAllAuto(int limit, int offset) throws SQLException {
 		List<Auto> vp=new ArrayList<Auto>();
 		
 		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAutoLimitOffset))  //Preparazione dello statement

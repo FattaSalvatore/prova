@@ -55,7 +55,7 @@ public class Servlet extends HttpServlet {
 		 if(ruolo.equals("Admin")) {
 			request.setAttribute("ruolo",ruolo);
 			try {
-				ArrayList<Auto> va = auto.SelectAuto(10,0);
+				ArrayList<Auto> va = auto.SelectAllAuto(10,0);
 				request.setAttribute("Lista", va);
 				
 				ArrayList<User> au = user.selectAllUsers();
@@ -71,10 +71,10 @@ public class Servlet extends HttpServlet {
 			 User utente=(User) session.getAttribute("user");
 			 try {
 				 System.out.println(utente.getId());
-				 ArrayList<Auto> va=auto.SelectAuto(utente.getId());
+				 System.out.println();
+				 ArrayList<Auto> va = auto.SelectAuto(utente.getId());
 				 request.setAttribute("Lista",va); 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 

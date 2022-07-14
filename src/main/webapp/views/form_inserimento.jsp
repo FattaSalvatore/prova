@@ -15,75 +15,7 @@
 </head>
 <body>
 
-	<style>
-
-button, input, select, textarea {
-	color: #5A5A5A;
-	margin: 0;
-}
-
-input {
-	line-height: normal;
-}
-
-#container {
-	border: solid 3px #474544;
-	max-width: 768px;
-	margin: 60px auto;
-	position: relative;
-}
-
-form {
-	margin: 5px 0;
-}
-
-h1 {
-	padding: 50px;
-	text-align: center;
-	letter-spacing: 10px
-}
-
-h4 {
-	letter-spacing: 10px
-}
-
-.underline {
-	border-bottom: solid 2px #474544;
-	margin: -0.512em auto;
-	width: 80px;
-}
-
-input[type='text'], [type='email'], select, textarea {
-	background: none;
-	border: none;
-	border-bottom: solid 2px #474544;
-	color: #474544;
-	font-size: 1.000em;
-	font-weight: 400;
-	letter-spacing: 1px;
-	margin: 0em 0 1.875em 0;
-	padding: 0 0 0.875em 0;
-	text-transform: uppercase;
-	width: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-ms-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
-}
-
-input[type='text']:focus, [type='email']:focus, textarea:focus {
-	outline: none;
-	padding: 0 0 0.875em 0;
-}
-
-</style>
-
+	
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
 	
 
