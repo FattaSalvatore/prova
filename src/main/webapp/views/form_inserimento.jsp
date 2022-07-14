@@ -53,24 +53,6 @@ h4 {
 	width: 80px;
 }
 
-.icon_wrapper {
-	margin: 50px auto 0;
-	width: 100%;
-}
-
-.icon {
-	display: block;
-	fill: #474544;
-	height: 50px;
-	margin: 0 auto;
-	width: 50px;
-}
-
-.email {
-	float: right;
-	width: 45%;
-}
-
 input[type='text'], [type='email'], select, textarea {
 	background: none;
 	border: none;
@@ -100,91 +82,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	padding: 0 0 0.875em 0;
 }
 
-.message {
-	float: none;
-}
-
-.name {
-	float: left;
-	width: 45%;
-}
-
-select::-ms-expand {
-	display: none;
-}
-
-.subject {
-	width: 100%;
-}
-
-.telephone {
-	width: 100%;
-}
-
-textarea {
-	line-height: 150%;
-	height: 150px;
-	resize: none;
-	width: 100%;
-}
-
-::-webkit-input-placeholder {
-	color: #474544;
-}
-
-:-moz-placeholder {
-	color: #474544;
-	opacity: 1;
-}
-
-::-moz-placeholder {
-	color: #474544;
-	opacity: 1;
-}
-
-:-ms-input-placeholder {
-	color: #474544;
-}
-
-#form_button:hover {
-	background: #474544;
-	color: #F2F3EB;
-}
-
-@media screen and (max-width: 768px) {
-	#container {
-		margin: 20px auto;
-		width: 95%;
-	}
-}
-
-@media screen and (max-width: 480px) {
-	h1 {
-		font-size: 26px;
-	}
-	.underline {
-		width: 68px;
-	}
-	#form_button {
-		padding: 15px 25px;
-	}
-}
-
-@media screen and (max-width: 420px) {
-	h1 {
-		font-size: 18px;
-	}
-	.icon {
-		height: 35px;
-		width: 35px;
-	}
-	.underline {
-		width: 53px;
-	}
-	input[type='text'], [type='email'], select, textarea {
-		font-size: 0.6;
-	}
-}
 </style>
 
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
@@ -205,12 +102,8 @@ textarea {
 		
 		
 		<label for="idProprietario">Proprietario:</label><br>
-		<select id="idProprietario" name="proprietario">
-			<option value='0'">Luca</option>
-			<option value='1'">Andrea</option>
-			<option value='2'">Giovanni</option>
-		</select><br><br>
-		
+		<input id="proprietario" name="proprietario" type="text">
+		<br><br>
 		<label for="idPrezzo">Prezzo:</label><br>
 		<input id="idPrezzo" name="prezzo" type="text"><br><br>
 		
@@ -223,11 +116,14 @@ textarea {
 		
 		<label for="idFinePolizza">Fine Polizza:</label><br>
 		<br><input type="date" id="f_polizza" name="f_polizza"  value="yyyy-mm-dd"><br><br>
-		<br><br><br>
+		<br><br>
 		
-	<center>
-		<input type="submit" class="button-30" style="width: 20%" value="Invia"><br><br>
-	</center>
+		<div style="display: flex; justify-content: center; width: auto">
+			<input type="submit" class="button-40" onClick="window.alert('stai per inserire i dati, premi ok per continuare')"><br></br><br>
+				<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
+					<input type="reset" class="button-40" >
+				</div>
+		</div>
 	</form>
 	</div>
 	<div class="w3-opacity" >
