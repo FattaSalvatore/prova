@@ -187,9 +187,10 @@ public class FormAutoServlet extends HttpServlet {
 					disp.forward(request,response);
 			    }
 		}else{
-			error="Non sei autorizzatoad accedere";
+			error="Non sei autorizzato ad accedere";
        		request.setAttribute("Error", error);
 	    	disp = request.getRequestDispatcher (errorPage);
+	    	disp.forward(request, response);
 		}
        
 	}
