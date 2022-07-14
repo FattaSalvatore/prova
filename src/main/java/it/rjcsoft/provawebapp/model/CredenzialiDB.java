@@ -26,7 +26,7 @@ public class CredenzialiDB {
 	
 	}
 	
-	public ResultSet SelectCredenziali(String email ) throws SQLException {
+	public ResultSet selectCredenziali(String email) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QuerySelectCredenziali); //Preparazione dello statement
 		prst.setString(1, email);
 		prst.execute();

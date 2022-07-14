@@ -80,7 +80,13 @@ public class FormAutoServlet extends HttpServlet {
 
 			UsersDB user = new UsersDB(conn);
 			
-			ArrayList<User> users = user.SelectUserLimitOffset(10,1);
+			ArrayList<User> users = null;
+			try {
+				users = user.selectAllUsers();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			request.setAttribute("proprietari", users);
 	    	
 	    	RequestDispatcher disp = request.getRequestDispatcher (Pagename);
