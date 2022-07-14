@@ -2,6 +2,7 @@ package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -39,7 +40,13 @@ public class Inserimento extends HttpServlet {
 		Connection conn = db.openConnection();
 		UsersDB user = new UsersDB(conn);
 		
-		ArrayList<User> users = user.SelectUserLimitOffset(10,1);
+		ArrayList<User> users = null;
+			try {
+				users = user.selectAllUsers();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		request.setAttribute("proprietari", users);
 		
 		
