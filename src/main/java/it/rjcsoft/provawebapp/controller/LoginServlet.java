@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.rjcsoft.provawebapp.model.CredenzialiDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
 import it.rjcsoft.provawebapp.model.User;
 import it.rjcsoft.provawebapp.model.UsersDB;
@@ -49,21 +50,26 @@ public class LoginServlet extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		RequestDispatcher disp=null;
-		/*
+        User utente=null;
+        CredenzialiDB credenziali= new CredenzialiDB(conn);
+        ResultSet rs=null;
+		
 		try {
-		       	UsersDB userdb=new UsersDB(conn);
-		      
-		        User utente=null;
-				byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
-				String decodedString = new String(decodedBytes);
+			 	
+				rs= credenziali.SelectCredenziali(email);
+		       	if(rs!=null) {
+		       		byte[] decodedBytes = Base64.getDecoder().decode(rs.getString("pwd"));
+					String decodedString = new String(decodedBytes);
+					
+					if(decodedString.equals(pwd)) {
+						 
+				        HttpSession session = request.getSession(true);
+				        session.setAttribute("user",utente);
+				        disp = request.getRequestDispatcher (Pagename2);
+				    
+					}
+		       	}
 				
-				if(decodedString.equals(pwd)) {
-					 
-			        HttpSession session = request.getSession(true);
-			        session.setAttribute("user",utente);
-			        disp = request.getRequestDispatcher (Pagename2);
-			    }
-			    
 				disp.forward(request,response);
 			        
 		        
@@ -72,7 +78,7 @@ public class LoginServlet extends HttpServlet {
 		 }finally {
 			 db.closeConnection(conn);
 		 }
-		*/
+		
 	}
 
 }
