@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.rjcsoft.provawebapp.model.*;
+import it.rjcsoft.provawebapp.services.CheckSession;
 
 
 /**
@@ -25,7 +27,8 @@ public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
     private static final String Pagename= "/views/visualizza.jsp"; 
-
+    private static final String errorPage= "/views/error.jsp"; 
+	private static final String homePage= "/Servlet";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,23 +47,42 @@ public class Servlet extends HttpServlet {
 		AutoDB auto = new AutoDB(conn);
 		UsersDB user= new UsersDB(conn);
 		
+		 RequestDispatcher disp = null;
+		 HttpSession session =request.getSession();
+		 CheckSession cs= new CheckSession(session);
+		 String ruolo=cs.CheckSession();
+		 System.out.println(ruolo);
+		 if(ruolo.equals("Admin")) {
+			request.setAttribute("ruolo",ruolo);
+			try {
+				ArrayList<Auto> va = auto.SelectAuto(10,0);
+				request.setAttribute("Lista", va);
+				
+				ArrayList<User> au = user.selectAllUsers();
+				request.setAttribute("PersonaLista", au);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally {
+				db.closeConnection(conn);
+			}
 		
-		
-		try {
-			ArrayList<Auto> va = auto.SelectAuto(10,0);
-			request.setAttribute("Lista", va);
+		 }else if(ruolo.equals("Guest")){
+			 User utente=(User) session.getAttribute("user");
+			 AutoDB dba=null;
+			 try {
+				 ArrayList<Auto> va=auto.SelectAuto(utente.getId());
+				 request.setAttribute("Lista",va); 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
 			
-			ArrayList<User> au = user.selectAllUsers();
-			request.setAttribute("PersonaLista", au);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}finally {
-			db.closeConnection(conn);
-		}
+			 request.setAttribute("PersonaLista", utente);
+		 }
 		
-	
-		 RequestDispatcher disp = request.getRequestDispatcher (Pagename);
+		 disp = request.getRequestDispatcher (Pagename);
 		 disp.forward(request,response);
 		
 	}

@@ -5,8 +5,16 @@ import javax.servlet.http.HttpSession;
 import it.rjcsoft.provawebapp.model.User;
 
 public class CheckSession {
+	private HttpSession sessione;
+	
+	
+	public CheckSession(HttpSession sessione) {
+		super();
+		this.sessione = sessione;
+	}
 
-	public String CheckSession(HttpSession sessione) {
+
+	public final String CheckSession() {
 		String check = null;
 		if(sessione.getId() == null) {
 			return check;

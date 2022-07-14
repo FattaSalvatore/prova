@@ -58,15 +58,23 @@ public class AutoDB {
 	}
 	
 	/* Select di Auto */
-	public ResultSet SelectAuto(int id) throws SQLException {
-		PreparedStatement prst = this.con.prepareStatement(QuerySelectAuto); //Preparazione dello statement
+	public ArrayList<Auto> SelectAuto(int id) throws SQLException {
+		List<Auto> vp=new ArrayList<Auto>();
+		try(PreparedStatement prst = this.con.prepareStatement(QuerySelectAuto))  //Preparazione dello statement
+		{
 		prst.setInt(1, id);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
-		if(!rs.next()) {
-			rs = null;
+		while(rs.next()) {
+			System.out.println("RISULTATO ID"+rs.getInt("id"));
+			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
+		
 		}
-		return rs; //return della select (ritorna la classe ResultSet)
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return (ArrayList<Auto>) vp;
 	}
 	
 	/* Select di Auto */
