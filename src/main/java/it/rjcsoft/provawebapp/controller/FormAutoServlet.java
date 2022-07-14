@@ -22,6 +22,7 @@ import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
 import it.rjcsoft.provawebapp.model.User;
 import it.rjcsoft.provawebapp.model.UsersDB;
+import it.rjcsoft.provawebapp.services.CheckSession;
 
 
 /**
@@ -31,8 +32,8 @@ import it.rjcsoft.provawebapp.model.UsersDB;
 public class FormAutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String Pagename= "/views/error.jsp"; 
-	private static final String Pagename2= "/Servlet";
+	private static final String errorPage= "/views/error.jsp"; 
+	private static final String homePage= "/Servlet";
 
        
     /**
@@ -59,13 +60,18 @@ public class FormAutoServlet extends HttpServlet {
 		doGet(request, response);
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
-		RequestDispatcher disp=null;
+		
 		String error="";
-		if (request.getRequestedSessionId() == null && request.isRequestedSessionIdValid()) {
-		    HttpSession session = request.getSession();
-		    User utente= (User) session.getAttribute("user");
-		    if(utente.getRuolo().equals("Admin")) {
-		    	
+		
+		RequestDispatcher disp = null;
+		 HttpSession session =request.getSession();
+		 CheckSession cs= new CheckSession(session);
+		 String ruolo=cs.CheckSession();
+		 System.out.println(ruolo);
+		 if(ruolo.equals("Admin")) {
+			request.setAttribute("ruolo",ruolo);
+			disp=request.getRequestDispatcher(errorPage);
+		 
 			    AutoDB auto = new AutoDB(conn);
 			    
 			    String marca=request.getParameter("marca");
@@ -97,7 +103,7 @@ public class FormAutoServlet extends HttpServlet {
 					}
 					request.setAttribute("proprietari", users);
 			    	
-			    	disp = request.getRequestDispatcher (Pagename);
+			    	disp = request.getRequestDispatcher (errorPage);
 			    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
 					disp.forward(request,response);
 			    }else {
@@ -172,23 +178,18 @@ public class FormAutoServlet extends HttpServlet {
 				    
 				    if(errori!=null) {
 				    	request.setAttribute("Error", errori);
-				    	disp = request.getRequestDispatcher (Pagename);
+				    	disp = request.getRequestDispatcher (errorPage);
 						
 				    }else {
-				    	disp = request.getRequestDispatcher (Pagename2);
+				    	disp = request.getRequestDispatcher (homePage);
 				    }
 				    db.closeConnection(conn);
 					disp.forward(request,response);
 			    }
-		    }else {
-		    	error="Account inesistente";
-	       		request.setAttribute("Error", error);
-		    	disp = request.getRequestDispatcher (Pagename);
-		    }
 		}else{
 			error="Non sei autorizzatoad accedere";
        		request.setAttribute("Error", error);
-	    	disp = request.getRequestDispatcher (Pagename);
+	    	disp = request.getRequestDispatcher (errorPage);
 		}
        
 	}
