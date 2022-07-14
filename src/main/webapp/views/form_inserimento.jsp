@@ -14,15 +14,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
-<<<<<<< HEAD
-<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
-=======
-	
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color:green">INSERIMENTO AUTO</h1>
->>>>>>> e15a9c30c1dcc8820bb8b7e4b83f1b488b2b78c3
-	
-
+	<br><br>
       <c:if test = "${Error != null}">
          <div style="display: flex; justify-content: center; width: auto"><p>Errore nell'inserimento dati</p></div>
       </c:if>

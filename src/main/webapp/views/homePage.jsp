@@ -21,8 +21,10 @@
 
 <!-- Header -->
 <header class="w3-panel w3-center w3-opacity" style="padding:80px 14px">
+
   <h1 class="w3-xlarge w3-xlargecolor">HOME PAGE</h1>
   <h3 class="w3-xlarge">Benvenuto sul sito RJC Assicurazione</h3>
+  <br>
   <div class="w3-padding-32">
       		<form action="/Provawebapp/MainServlet">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>

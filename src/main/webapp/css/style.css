@@ -1766,7 +1766,7 @@ a {
 	border-color: #e7ffff !important
 }
 
-/* CSS FORM_INSERIMENTO */
+/* ---------------------------------------------------- */
 
 button, input, select, textarea {
 	color: #5A5A5A;
@@ -1789,7 +1789,7 @@ form {
 }
 
 h1 {
-	padding: 50px;
+	padding: 10px;
 	text-align: center;
 	letter-spacing: 10px
 }
@@ -1814,7 +1814,6 @@ input[type='text'], [type='email'], select, textarea {
 	letter-spacing: 1px;
 	margin: 0em 0 1.875em 0;
 	padding: 0 0 0.875em 0;
-	text-transform: uppercase;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
