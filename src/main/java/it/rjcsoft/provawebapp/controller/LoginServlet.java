@@ -27,6 +27,16 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String Pagename2= "/Home";
 	private static final String Pagename= "/views/error.jsp"; 
+	
+	private static final String EMAIL = "email";
+	private static final String PWD = "pwd";
+	private static final String ID = "id";
+	private static final String NOME = "nome";
+	private static final String COGNOME = "cognome";
+	private static final String CF = "cf";
+	private static final String DATANASCITA = "datanascita";
+	private static final String RUOLO = "ruolo";
+	private static final String FK_IDUSER = "iduser";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,33 +56,37 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email=request.getParameter("email");
-		String pwd=request.getParameter("pwd");
+		String email=request.getParameter(EMAIL);
+		String pwd=request.getParameter(PWD);
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		RequestDispatcher disp=null;
         User utente=null;
-        CredenzialiDB credenziali= new CredenzialiDB(conn);
+        UsersDB user= new UsersDB(conn);
+        CredenzialiDB credenziali = new CredenzialiDB(conn);
         ResultSet rs=null;
 		String error="";
-		if(email==null || email.isEmpty() || pwd==null || pwd.isEmpty()) {
+		if(email!=null || !email.isEmpty() || pwd!=null || !pwd.isEmpty()) {
 		
 			try {
-				 	
-					rs= credenziali.selectCredenziali(email);
+				 	ResultSet rsCredenziali = credenziali.selectCredenziali(email);
+					rs = user.SelectUser(rsCredenziali.getInt(FK_IDUSER));
+					rsCredenziali = null;
 			       	if(rs!=null) {
 						
-						String dbinput = rs.getString("pwd");
+						String dbinput = rs.getString(PWD);
 						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
+						System.out.println("Login confermato");
 						if(dbinput.equals(encodedString)) {
 							
-							utente = new User(rs.getInt("id"),rs.getString("email"),rs.getString("pwd"),rs.getString("nome"),rs.getString("cognome"),rs.getString("cf"),rs.getDate("datanascita"),rs.getString("ruolo")); 
+							utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
 					        HttpSession session = request.getSession(true);
+					        System.out.println("Login confermato");
 					        session.setAttribute("user",utente);
 					        disp = request.getRequestDispatcher (Pagename2);
 					    
 						}else {
-							error="Account inesistentePassword non corretta";
+							error="Password non corretta";
 				       		request.setAttribute("Error", error);
 					    	disp = request.getRequestDispatcher (Pagename);
 						}

@@ -12,7 +12,7 @@ public class UsersDB {
 	private Connection con;
 	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
-	private String QuerySelectUser="Select * from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.fk_idUser = tu.id WHERE id = ?";
+	private String QuerySelectUser="Select * from test1_users tu JOIN test1_roles tr ON tr.id=ruolo_id JOIN test1_credenziali tc ON tc.iduser=tu.id WHERE tu.id = ?";
 	private String QueryUpdateUser="Update test1_users set nome=?, cf=? where id=?";
 	private String QuerySelectAllUsers="Select * from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.fk_idUser = tu.id";
 	
