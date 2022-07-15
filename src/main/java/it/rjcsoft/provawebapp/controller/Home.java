@@ -49,6 +49,9 @@ public class Home extends HttpServlet {
 		 System.out.println(ruolo);
 		 if(ruolo!=null) {
 			 if(ruolo.equals("Admin") || ruolo.equals("Guest")) {
+				 	User utente = (User) session.getAttribute("user");
+				 	request.setAttribute("nome", utente.getNome());
+				 	request.setAttribute("cognome", utente.getCognome());
 					request.setAttribute("ruolo",ruolo);
 					disp=request.getRequestDispatcher(Pagename);
 				 }else {

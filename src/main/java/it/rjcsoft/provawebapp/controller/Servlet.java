@@ -27,8 +27,6 @@ public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
     private static final String Pagename= "/views/visualizza.jsp"; 
-    private static final String errorPage= "/views/error.jsp"; 
-	private static final String homePage= "/Servlet";
 	private static final String loginPage= "/";
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,6 +62,7 @@ public class Servlet extends HttpServlet {
 						
 						ArrayList<User> au = user.selectAllUsers();
 						request.setAttribute("PersonaLista", au);
+						disp = request.getRequestDispatcher (Pagename);
 					} catch (SQLException e) {
 						
 						e.printStackTrace();
@@ -79,6 +78,7 @@ public class Servlet extends HttpServlet {
 						 System.out.println();
 						 ArrayList<Auto> va = auto.SelectAuto(utente.getId());
 						 request.setAttribute("Lista",va); 
+						 disp = request.getRequestDispatcher (Pagename);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}finally {
@@ -88,7 +88,6 @@ public class Servlet extends HttpServlet {
 				 }
 		 }
 		 db.closeConnection(conn);
-		 disp = request.getRequestDispatcher (Pagename);
 		 disp.forward(request,response);
 		
 	}
