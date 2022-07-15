@@ -2,7 +2,6 @@ package it.rjcsoft.provawebapp.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
 
@@ -79,14 +78,11 @@ public class LoginServlet extends HttpServlet {
 						
 						String dbinput = rs.getString(PWD);
 						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
-						System.out.println("Login confermato");
 						if(dbinput.equals(encodedString)) {
 							
-							System.out.println(email);
-							System.out.println(pwd);
+
 							utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
 					        session = request.getSession(true);
-					        System.out.println("Login confermato");
 					        session.setAttribute("user",utente);
 					        disp = request.getRequestDispatcher (Pagename2);
 					    

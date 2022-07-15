@@ -50,7 +50,6 @@ public class Servlet extends HttpServlet {
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
-		 System.out.println(ruolo);
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
@@ -74,8 +73,6 @@ public class Servlet extends HttpServlet {
 					 request.setAttribute("ruolo",ruolo);
 					 User utente=(User) session.getAttribute("user");
 					 try {
-						 System.out.println(utente.getId());
-						 System.out.println();
 						 ArrayList<Auto> va = auto.SelectAuto(utente.getId());
 						 request.setAttribute("Lista",va); 
 						 disp = request.getRequestDispatcher (Pagename);

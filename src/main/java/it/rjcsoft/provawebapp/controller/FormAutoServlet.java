@@ -68,7 +68,6 @@ public class FormAutoServlet extends HttpServlet {
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
-		 System.out.println(ruolo);
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
@@ -201,7 +200,6 @@ public class FormAutoServlet extends HttpServlet {
 	}
 	
 	private Date StringToDate(String ToBeConverted)throws  ParseException{
-		System.out.println("FUNZIONE DATE");
 		java.util.Date date_casted=null; 
 		Date dateSql=null;
 		
@@ -215,7 +213,6 @@ public class FormAutoServlet extends HttpServlet {
 	}
 	
 	private Timestamp StringToTimestamp(String ToBeConverted)throws ParseException {
-		System.out.println("FUNZIONE TIMESTAMP");
 		
 		Calendar parsedDate=Calendar.getInstance();
 		
