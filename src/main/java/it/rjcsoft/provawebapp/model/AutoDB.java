@@ -28,6 +28,7 @@ public class AutoDB {
 	private String datarevisione="datarevisione";
 	private String inizio_polizza="inizio_polizza";
 	private String fine_polizza="fine_polizza";
+	private String cf="cf";
 	
 	
 	public AutoDB(Connection con) {
@@ -65,8 +66,10 @@ public class AutoDB {
 		prst.setInt(1, id);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
+		UsersDB user = new UsersDB(this.con);
+		ResultSet rsUser = user.SelectUser(rs.getInt(proprietario));
 		while(rs.next()) {
-			vp.add(new Auto(rs.getInt("id"),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
+			vp.add(new Auto(rs.getInt("id"),rs.getString(marca),rsUser.getString(cf),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
 			
@@ -86,10 +89,11 @@ public class AutoDB {
 		prst.setInt(2, offset);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
+		UsersDB user = new UsersDB(this.con);
+		ResultSet rsUser = user.SelectUser(rs.getInt(proprietario));
 		while(rs.next()) {
 			
-			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
-		
+			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rsUser.getString(cf),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		}
 			
 		}catch(Exception e) {

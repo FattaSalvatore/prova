@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import it.rjcsoft.provawebapp.model.*;
 import it.rjcsoft.provawebapp.services.CheckSession;

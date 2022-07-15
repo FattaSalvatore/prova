@@ -7,17 +7,19 @@ public class Auto {
     private String modello;
     private String targa;
     private int proprietario;
+    private String cf;
     private String prezzo_auto;
     private Date datarevisione;
     private Timestamp inizio_polizza;
     private Timestamp fine_polizza;
     
-    public Auto(int id, String marca, String modello, String targa, int proprietario, String prezzo_auto,
+    public Auto(int id, String marca, String cf, String modello, String targa, int proprietario, String prezzo_auto,
             Date datarevisione, Timestamp inizio_polizza, Timestamp fine_polizza) {
         super();
         this.id = id;
         this.marca = marca;
         this.modello = modello;
+        this.cf = cf;
         this.targa = targa;
         this.proprietario = proprietario;
         this.prezzo_auto = prezzo_auto;
@@ -78,5 +80,11 @@ public class Auto {
     }
     public void setFine_polizza(Timestamp fine_polizza) {
         this.fine_polizza = fine_polizza;
+    }
+    public String getCF() {
+        return cf;
+    }
+    public void setCF(String cf) {
+        this.cf = cf;
     }
 }
