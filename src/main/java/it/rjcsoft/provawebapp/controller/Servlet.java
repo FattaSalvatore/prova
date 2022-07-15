@@ -29,6 +29,7 @@ public class Servlet extends HttpServlet {
     private static final String Pagename= "/views/visualizza.jsp"; 
     private static final String errorPage= "/views/error.jsp"; 
 	private static final String homePage= "/Servlet";
+	private static final String loginPage= "/";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -52,35 +53,39 @@ public class Servlet extends HttpServlet {
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
 		 System.out.println(ruolo);
-		 if(ruolo.equals("Admin")) {
-			request.setAttribute("ruolo",ruolo);
-			try {
-				ArrayList<Auto> va = auto.SelectAllAuto(10,0);
-				request.setAttribute("Lista", va);
+		 if(ruolo == null) {
+			 disp = request.getRequestDispatcher (loginPage);
+		 }else {
+			 if(ruolo.equals("Admin")) {
+					request.setAttribute("ruolo",ruolo);
+					try {
+						ArrayList<Auto> va = auto.SelectAllAuto(10,0);
+						request.setAttribute("Lista", va);
+						
+						ArrayList<User> au = user.selectAllUsers();
+						request.setAttribute("PersonaLista", au);
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+					}finally {
+						db.closeConnection(conn);
+					}
 				
-				ArrayList<User> au = user.selectAllUsers();
-				request.setAttribute("PersonaLista", au);
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}finally {
-				db.closeConnection(conn);
-			}
-		
-		 }else if(ruolo.equals("Guest")){
-			 request.setAttribute("ruolo",ruolo);
-			 User utente=(User) session.getAttribute("user");
-			 try {
-				 System.out.println(utente.getId());
-				 System.out.println();
-				 ArrayList<Auto> va = auto.SelectAuto(utente.getId());
-				 request.setAttribute("Lista",va); 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				db.closeConnection(conn);
-			}
-		 
+				 }else if(ruolo.equals("Guest")){
+					 request.setAttribute("ruolo",ruolo);
+					 User utente=(User) session.getAttribute("user");
+					 try {
+						 System.out.println(utente.getId());
+						 System.out.println();
+						 ArrayList<Auto> va = auto.SelectAuto(utente.getId());
+						 request.setAttribute("Lista",va); 
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}finally {
+						db.closeConnection(conn);
+					}
+				 
+				 }
 		 }
 		 db.closeConnection(conn);
 		 disp = request.getRequestDispatcher (Pagename);

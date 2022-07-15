@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session=null;
 		String email=request.getParameter(EMAIL);
 		String pwd=request.getParameter(PWD);
 		DBdriver db = DBdriver.getInstance();
@@ -66,22 +66,26 @@ public class LoginServlet extends HttpServlet {
         CredenzialiDB credenziali = new CredenzialiDB(conn);
         ResultSet rs=null;
 		String error="";
+		session=request.getSession();  
+        session.invalidate();
 		if(email!=null || !email.isEmpty() || pwd!=null || !pwd.isEmpty()) {
 		
 			try {
 				 	ResultSet rsCredenziali = credenziali.selectCredenziali(email);
 					rs = user.SelectUser(rsCredenziali.getInt(FK_IDUSER));
 					rsCredenziali = null;
-			       	if(rs!=null) {
+			       	
+					if(rs!=null) {
 						
 						String dbinput = rs.getString(PWD);
 						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
 						System.out.println("Login confermato");
 						if(dbinput.equals(encodedString)) {
+							
 							System.out.println(email);
 							System.out.println(pwd);
 							utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
-					        HttpSession session = request.getSession(true);
+					        session = request.getSession(true);
 					        System.out.println("Login confermato");
 					        session.setAttribute("user",utente);
 					        disp = request.getRequestDispatcher (Pagename2);

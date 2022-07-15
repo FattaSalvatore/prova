@@ -25,7 +25,8 @@ import it.rjcsoft.provawebapp.services.CheckSession;
 public class Inserimento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String Pagename = "/views/form_inserimento.jsp";
-	private static final String errorPage= "/views/error.jsp"; 
+	private static final String errorPage= "/views/error.jsp";
+	private static final String loginPage= "/";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,27 +44,31 @@ public class Inserimento extends HttpServlet {
 		Connection conn = db.openConnection();
 		UsersDB user = new UsersDB(conn);
 		RequestDispatcher disp = null;
-		 HttpSession session =request.getSession();
-		 CheckSession cs= new CheckSession(session);
-		 String ruolo=cs.CheckSession();
+		 HttpSession session = request.getSession();
+		 CheckSession cs = new CheckSession(session);
+		 String ruolo = cs.CheckSession();
 		 System.out.println(ruolo);
-		 if(ruolo.equals("Admin")) {
-			//Arraylist menù a tendina form
-			request.setAttribute("ruolo",ruolo);
-			ArrayList<User> users = null;
-			try {
-				users = user.selectAllUsers();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				db.closeConnection(conn);
-			}
-			request.setAttribute("proprietari", users);
-		    disp = request.getRequestDispatcher (Pagename);
+		 if(ruolo == null) {
+			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
-			 request.setAttribute("error", "Non seri autorizzato ad accedere");
-			 disp = request.getRequestDispatcher (errorPage); 
+			 if(ruolo.equals("Admin")) {
+					//Arraylist menù a tendina form
+					request.setAttribute("ruolo",ruolo);
+					ArrayList<User> users = null;
+					try {
+						users = user.selectAllUsers();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}finally {
+						db.closeConnection(conn);
+					}
+					request.setAttribute("proprietari", users);
+				    disp = request.getRequestDispatcher (Pagename);
+				 }else {
+					 request.setAttribute("error", "Non seri autorizzato ad accedere");
+					 disp = request.getRequestDispatcher (errorPage); 
+				 }
 		 }
 		
 		

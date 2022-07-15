@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -26,15 +28,12 @@
   <h3 class="w3-xlarge">Benvenuto sul sito RJC Assicurazione</h3>
   <br>
   <div class="w3-padding-32">
-      		<form action="/Provawebapp/MainServlet">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>
-		</form>
-		<form action="/Provawebapp/Inserimento">
-			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento</button></a></div>
-		</form>
-			<form action="./views/login.jsp">
-			<div style="display: flex; justify-content: center; width: auto"><a href="./views/login.jsp"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
-		</form>
+			<c:if test="${ruolo == 'Admin' }">
+				<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento</button></a></div>
+			</c:if>
+			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Logout"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
+
   </div>
 </header>
   

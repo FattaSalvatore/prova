@@ -46,12 +46,18 @@ public class Home extends HttpServlet {
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
-		 if(ruolo.equals("Admin") || ruolo.equals("Guest")) {
-			request.setAttribute("ruolo",ruolo);
-			disp=request.getRequestDispatcher(Pagename);
+		 System.out.println(ruolo);
+		 if(ruolo!=null) {
+			 if(ruolo.equals("Admin") || ruolo.equals("Guest")) {
+					request.setAttribute("ruolo",ruolo);
+					disp=request.getRequestDispatcher(Pagename);
+				 }else {
+					 disp=request.getRequestDispatcher(loginPage);
+				 }
 		 }else {
 			 disp=request.getRequestDispatcher(loginPage);
 		 }
+		 
 		
 		disp.forward(request,response);
 	}
