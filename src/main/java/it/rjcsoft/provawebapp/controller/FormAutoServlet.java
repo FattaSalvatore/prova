@@ -3,6 +3,7 @@ package it.rjcsoft.provawebapp.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -76,7 +77,7 @@ public class FormAutoServlet extends HttpServlet {
 						disp=request.getRequestDispatcher(homePage);
 				 
 					    AutoDB auto = new AutoDB(conn);
-					    
+					    UsersDB userdb = new UsersDB(conn);
 					    String marca=request.getParameter("marca");
 					    String modello=request.getParameter("modello");
 					    String targa=request.getParameter("targa");
@@ -85,7 +86,7 @@ public class FormAutoServlet extends HttpServlet {
 					    String datarevisione=request.getParameter("revisione");
 					    String inizio_polizza=request.getParameter("i_polizza");
 					    String fine_polizza=request.getParameter("f_polizza");
-					   
+					    ResultSet rs=null;
 					    if(marca==null || marca.isEmpty() || 
 				 	       modello==null || modello.isEmpty() ||
 				 	       targa==null || targa.isEmpty() ||
@@ -94,17 +95,6 @@ public class FormAutoServlet extends HttpServlet {
 				 	       datarevisione==null || datarevisione.isEmpty() ||
 				 	       inizio_polizza==null || inizio_polizza.isEmpty() ||
 				 	       fine_polizza==null || fine_polizza.isEmpty()){
-
-							UsersDB user = new UsersDB(conn);
-							
-							ArrayList<User> users = null;
-							try {
-								users = user.selectAllUsers();
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							request.setAttribute("proprietari", users);
 					    	
 					    	disp = request.getRequestDispatcher (errorPage);
 					    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
@@ -155,37 +145,46 @@ public class FormAutoServlet extends HttpServlet {
 						    	errori+="Formato data fine polizza errato deve essere: yyyy-MM-dd \n";
 							}
 						    
-						  
-						    try {
-						    	 proprietario_casted= Integer.parseInt(proprietario);
-						    } catch (NumberFormatException nfe) {
-						    	errori+="Numero non intero \n";
-						    }
-						    
-						    
-						    try{
-						    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
-						    }
-						    catch(NumberFormatException e){
-						    	errori+="Numero non double \n";
-						    }
-						    
-						    try {
-						    			
-								auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+						    if(inizio_polizza_cast.before(fine_polizza_cast)) {
+						    	
+						    	try {
+									rs=userdb.SelectUser2(proprietario);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						    	
+							    
+							    try{
+							    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
+							    }
+							    catch(NumberFormatException e){
+							    	errori+="Numero non double \n";
+							    }
+							    
+							    try {
+							    			
+									auto.InsertAuto(marca, modello, targa, rs.getInt("id"), prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
 
-						    } catch (SQLException e) {
-								// TODO Auto-generated catch block
-						    	errori+="Dati non insriti \n";
-							}
-						    
-						    if(errori!=null) {
+							    } catch (SQLException e) {
+									// TODO Auto-generated catch block
+							    	errori+="Dati non insriti \n";
+								}
+							    
+							    if(errori!=null) {
+							    	request.setAttribute("Error", errori);
+							    	disp = request.getRequestDispatcher (errorPage);
+									
+							    }else {
+							    	disp = request.getRequestDispatcher (homePage);
+							    }
+						    }else {
+						    	errori+="La data di fine polizza è prima di inizio polizza \n";
 						    	request.setAttribute("Error", errori);
 						    	disp = request.getRequestDispatcher (errorPage);
-								
-						    }else {
-						    	disp = request.getRequestDispatcher (homePage);
 						    }
+						  
+						    
 						    db.closeConnection(conn);
 							disp.forward(request,response);
 					    }

@@ -17,11 +17,11 @@ public class CredenzialiDB {
 		this.con = con;
 	}
 
-	public boolean insertCredenziali(String email, String pwd, String ruolo ) throws SQLException {
+	public boolean insertCredenziali(String email, String pwd, int ruolo ) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertCredenziali); //Preparazione dello statement
 		prst.setString(1, email);
 		prst.setString(2, pwd);
-		prst.setString(3, ruolo);
+		prst.setInt(3, ruolo);
 		return prst.execute(); //esecuzione dello statement (ritorna true se andato a buon fine)
 	
 	}
