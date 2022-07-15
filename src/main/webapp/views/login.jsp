@@ -90,8 +90,8 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
   margin: 20px;
 
 }
-
 </style>
+
 
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color: #6666ff">AUTENTICAZIONE</h1>
 	<div style="display: flex; align: center; justify-content: center">

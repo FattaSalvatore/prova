@@ -15,8 +15,8 @@ public class AutoDB {
 	
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
 	private String QueryDeleteAuto="DELETE FROM test1_auto WHERE targa = ?";
-	private String QuerySelectAuto="Select * from test1_auto WHERE proprietario = ?";
-	private String QuerySelectAutoLimitOffset="Select * from test1_auto LIMIT ? OFFSET ?";
+	private String QuerySelectAuto="Select ta.*, tu.cf from test1_auto ta INNER JOIN test1_users tu ON tu.id=ta.proprietario WHERE proprietario = ?";
+	private String QuerySelectAutoLimitOffset="Select ta.*, tu.cf from test1_auto ta INNER JOIN test1_users tu ON tu.id=ta.proprietario LIMIT ? OFFSET ?";
 	private String QueryUpdateAuto="Update test1_auto set  proprietario=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
 	
 	private String id="id";
@@ -28,6 +28,8 @@ public class AutoDB {
 	private String datarevisione="datarevisione";
 	private String inizio_polizza="inizio_polizza";
 	private String fine_polizza="fine_polizza";
+	private String cf="cf";
+	private String iduser="iduser";
 	
 	
 	public AutoDB(Connection con) {
@@ -66,7 +68,7 @@ public class AutoDB {
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
-			vp.add(new Auto(rs.getInt("id"),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
+			vp.add(new Auto(rs.getInt("id"),rs.getString(marca),rs.getString(cf),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		
 		}
 			
@@ -88,8 +90,7 @@ public class AutoDB {
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			
-			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
-		
+			vp.add(new Auto(rs.getInt(id),rs.getString(marca),rs.getString(cf),rs.getString(modello),rs.getString(targa),rs.getInt(proprietario),rs.getString(prezzo_auto),rs.getDate(datarevisione),rs.getTimestamp(inizio_polizza),rs.getTimestamp(fine_polizza)));
 		}
 			
 		}catch(Exception e) {

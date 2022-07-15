@@ -52,27 +52,40 @@
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
 					<table class="w3-table-all w3-centered" style="width:70%" >
 				<tr>
-							<th>ID</th>
 							<th>Marca</th>
 							<th>Modello</th>
 							<th>Targa</th>
-							<th>Id_Proprietario</th>
+							<th>Codice Fiscale</th>
 							<th>Prezzo</th>
 							<th>Data Revisione</th>
 							<th>Inizio Polizza</th>
 							<th>Fine Polizza</th>
+							<th>Modifica</th>
 						</tr>
 						<c:forEach var="a" items="${Lista}">
 						<tr>
-							<td>${a.id}</td> 
 				    		<td>${a.marca}</td>
 				    		<td>${a.modello}</td>
 				    		<td>${a.targa}</td>
-				    		<td>${a.proprietario}</td>
+				    		<td>${a.CF}</td>
 				    		<td>${a.prezzo_auto}</td>
 				    		<td>${a.datarevisione}</td>
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
+				            <td>
+				            <div class="w3-panel w3-center w3-opacity">
+				            	<form action="/Provawebapp/ModificaAuto" method="POST" >
+				            		<input type="hidden" name="marca" value="${a.marca }">
+				            		<input type="hidden" name="modello" value="${a.modello }">
+				            		<input type="hidden" name="prezzo" value="${a.prezzo_auto }">
+				            		<input type="hidden" name="datarevisione" value="${a.datarevisione }">
+				            		<input type="hidden" name="i_polizza" value="${a.inizio_polizza }">
+				            		<input type="hidden" name="f_polizza" value="${a.fine_polizza }">
+				            		<input type="hidden" name="id" value="${a.id }">
+				            		<input type="submit" value="MODIFICA">
+				            	</form>
+				            </div>
+				            </td>
 				    	</tr>
 				    	</c:forEach>
 				   </div>
@@ -86,7 +99,6 @@
 					<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						<table class="w3-table-all w3-centered" style="width:60%">
 							<tr>
-								<th>ID</th>
 								<th>Nome</th>
 								<th>Cognome</th>
 								<th>CodiceFiscale</th>
@@ -94,7 +106,6 @@
 							</tr>
 							<c:forEach var="p" items="${PersonaLista}">
 							<tr>
-								<td>${p.id}</td> 
 					    		<td>${p.nome}</td>
 					    		<td>${p.cognome}</td>
 					    		<td>${p.cf}</td>
