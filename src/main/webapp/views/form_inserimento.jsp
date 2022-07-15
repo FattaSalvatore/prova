@@ -39,6 +39,7 @@
 		<label for="idRevisione">Revisione:</label><br>
 		 <br><input type="date" id="revisione" name="revisione"  value="yyyy-mm-dd"><br><br>
 		<br>
+		
 		<label for="idInizioPolizza">Inizio Polizza:</label><br>
 		<br><input type="date" id="i_polizza" name="i_polizza"  value="yyyy-mm-dd"><br><br>
 		<br>
@@ -47,7 +48,10 @@
 		<br><input type="date" id="f_polizza" name="f_polizza"  value="yyyy-mm-dd"><br><br>
 		<br><br>
 		
-		<div style="display: flex; justify-content: center; width: auto">
+				<div style="display: flex; justify-content: center; width: auto">
+					<input type="reset" class="button-40" >
+		
+		<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
 			<input type="submit" class="button-40" onClick="confirmAction()"><br></br><br>
 					<script>
 						//funzione aler
@@ -65,8 +69,6 @@
 				        }
 				      }
 				    </script>
-				<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
-					<input type="reset" class="button-40" >
 				</div>
 		</div>
 	</form>

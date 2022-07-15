@@ -81,11 +81,22 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	padding: 0 0 0.875em 0;
 }
 
+.box{
+  background-color: lightgrey;
+  width: 40%;
+  border-radius: 12px;
+  border: 2px solid blue;
+  padding: 50px;
+  margin: 20px;
+
+}
+
 </style>
 
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color: #6666ff">AUTENTICAZIONE</h1>
+	<div style="display: flex; align: center; justify-content: center">
+	<div class="w3-opacity box" style="display: flex; justify-content: center">
 	
-	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
 	<form method="POST" action="/Provawebapp/Login">
 
 		<label for="idEmail">Email:</label> 
@@ -98,7 +109,9 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 		<br><br>
 		<br><br>
 			<div style="display: flex; justify-content: center; width: auto">
-			<input type="submit" class="button-40" onclick="confirmAction()"><br></br><br>
+				<input type="reset" class="button-40" >
+			<div style="display: flex; justify-content: center; width: auto; padding-left:5%">
+			<input type="submit" class="button-40" onclick="confirmAction()">
 					<script>
 						//funzione aler
 				      function confirmAction() {
@@ -114,12 +127,11 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 				        }
 				      }
 				    </script>
-				<div style="display: flex; justify-content: center; width: auto; padding-left:10%">
-					<input type="reset" class="button-40" >
 				</div>
 			</div>
 	</form>
 	</div>
+</div>
 </body>
 </html>
 	
