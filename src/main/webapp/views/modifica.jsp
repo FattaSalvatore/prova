@@ -21,7 +21,7 @@
       </c:if>
 	
 	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
-	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
+	<form method="POST" action="/Provawebapp/FormModificaAuto" style="width:30%;">
 		<label for="idMarca">Marca:</label><br>
 		<input id="idMarca" name="marca" type="text" value="${marca }"><br><br>
 		<label for="idModello">Modello:</label><br>

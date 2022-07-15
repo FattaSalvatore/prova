@@ -38,13 +38,13 @@
 		
 			.my-custom-scrollbar {
 			position: relative;
-			height: 200px;
+			height: 400px;
 			overflow: auto;
 			}
 			.table-wrapper-scroll-y {
 			display: block;
 			}
-		
+			;
 		</style>
 		<br><br>
 				<center>
@@ -73,7 +73,7 @@
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
 				            <td>
-				            <div class="w3-panel w3-center w3-opacity">
+				            <div class="w3-panel w3-center">
 				            	<form action="/Provawebapp/ModificaAuto" method="POST" >
 				            		<input type="hidden" name="marca" value="${a.marca }">
 				            		<input type="hidden" name="modello" value="${a.modello }">
