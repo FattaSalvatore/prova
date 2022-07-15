@@ -47,7 +47,6 @@ public class Inserimento extends HttpServlet {
 		 HttpSession session = request.getSession();
 		 CheckSession cs = new CheckSession(session);
 		 String ruolo = cs.CheckSession();
-		 System.out.println(ruolo);
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {

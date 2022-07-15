@@ -46,7 +46,6 @@ public class Home extends HttpServlet {
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
-		 System.out.println(ruolo);
 		 if(ruolo!=null) {
 			 if(ruolo.equals("Admin") || ruolo.equals("Guest")) {
 				 	User utente = (User) session.getAttribute("user");

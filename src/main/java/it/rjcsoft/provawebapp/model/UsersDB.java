@@ -76,7 +76,6 @@ public class UsersDB {
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
-			System.out.println("RISULTATO ID"+rs.getInt("id"));
 			lu.add(new User(rs.getInt(id),rs.getString(nome),rs.getString(cognome),rs.getString(cf),rs.getDate(datanascita), rs.getString(ruolo)));
 		
 		}

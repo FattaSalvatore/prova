@@ -37,4 +37,26 @@ public class CredenzialiDB {
 		return rs;
 	}
 	
+	public boolean DeleteCredenziali(String email) throws SQLException {
+		PreparedStatement prst = this.con.prepareStatement(QueryDeleteCredenziali);
+		prst.setString(1, email);
+		return prst.execute();
+	}
+	
+
+	public ResultSet UpdateCredenziali(String email,String pwd,String ruolo) throws SQLException{
+		PreparedStatement prst = this.con.prepareStatement(QueryUpdateCredenziali);
+		prst.setString(1, email);
+		prst.setString(2, pwd);
+		prst.setString(3, ruolo);
+		prst.setString(4, email);
+		prst.execute();
+		ResultSet rs = prst.getResultSet();
+		if(!rs.next()) {
+			rs = null;
+		}
+		return rs;
+		
+	}
+	
 }

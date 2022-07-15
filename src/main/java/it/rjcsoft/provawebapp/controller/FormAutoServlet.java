@@ -68,13 +68,12 @@ public class FormAutoServlet extends HttpServlet {
 		 HttpSession session =request.getSession();
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
-		 System.out.println(ruolo);
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
 			 if(ruolo.equals("Admin")) {
-					request.setAttribute("ruolo",ruolo);
-					disp=request.getRequestDispatcher(homePage);
+						request.setAttribute("ruolo",ruolo);
+						disp=request.getRequestDispatcher(homePage);
 				 
 					    AutoDB auto = new AutoDB(conn);
 					    
@@ -197,11 +196,9 @@ public class FormAutoServlet extends HttpServlet {
 			    	disp.forward(request, response);
 				}
 		 }
-       
 	}
 	
 	private Date StringToDate(String ToBeConverted)throws  ParseException{
-		System.out.println("FUNZIONE DATE");
 		java.util.Date date_casted=null; 
 		Date dateSql=null;
 		
@@ -215,7 +212,6 @@ public class FormAutoServlet extends HttpServlet {
 	}
 	
 	private Timestamp StringToTimestamp(String ToBeConverted)throws ParseException {
-		System.out.println("FUNZIONE TIMESTAMP");
 		
 		Calendar parsedDate=Calendar.getInstance();
 		
