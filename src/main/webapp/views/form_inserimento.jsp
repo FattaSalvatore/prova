@@ -64,8 +64,7 @@
 				        	//false
 				        	alert("Hai annullato l'inserimento della vettura");
 				        	//killo il processo della form
-			        	    event.preventDefault();
-				        	
+			        	    event.preventDefault();        	
 				        }
 				      }
 				    </script>

@@ -52,11 +52,10 @@
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
 					<table class="w3-table-all w3-centered" style="width:70%" >
 				<tr>
-							<th>ID</th>
 							<th>Marca</th>
 							<th>Modello</th>
 							<th>Targa</th>
-							<th>Id_Proprietario</th>
+							<th>Codice Fiscale</th>
 							<th>Prezzo</th>
 							<th>Data Revisione</th>
 							<th>Inizio Polizza</th>
@@ -64,7 +63,6 @@
 						</tr>
 						<c:forEach var="a" items="${Lista}">
 						<tr>
-							<td>${a.id}</td> 
 				    		<td>${a.marca}</td>
 				    		<td>${a.modello}</td>
 				    		<td>${a.targa}</td>
@@ -86,7 +84,6 @@
 					<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						<table class="w3-table-all w3-centered" style="width:60%">
 							<tr>
-								<th>ID</th>
 								<th>Nome</th>
 								<th>Cognome</th>
 								<th>CodiceFiscale</th>
@@ -94,7 +91,6 @@
 							</tr>
 							<c:forEach var="p" items="${PersonaLista}">
 							<tr>
-								<td>${p.id}</td> 
 					    		<td>${p.nome}</td>
 					    		<td>${p.cognome}</td>
 					    		<td>${p.cf}</td>

@@ -45,8 +45,7 @@
 				        	//false
 				        	alert("vuoi annullare l'opzione?");
 				        	//killo il processo della form
-			        	    event.preventDefault();
-				        	
+			        	    event.preventDefault();        	
 				        }
 				      }
 				    </script>
