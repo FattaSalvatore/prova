@@ -60,6 +60,7 @@
 							<th>Data Revisione</th>
 							<th>Inizio Polizza</th>
 							<th>Fine Polizza</th>
+							<th>Modifica</th>
 						</tr>
 						<c:forEach var="a" items="${Lista}">
 						<tr>
@@ -80,6 +81,7 @@
 				            		<input type="hidden" name="datarevisione" value="${a.datarevisione }">
 				            		<input type="hidden" name="i_polizza" value="${a.inizio_polizza }">
 				            		<input type="hidden" name="f_polizza" value="${a.fine_polizza }">
+				            		<input type="hidden" name="id" value="${a.id }">
 				            		<input type="submit" value="MODIFICA">
 				            	</form>
 				            </div>
