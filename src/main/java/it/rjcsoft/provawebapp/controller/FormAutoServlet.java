@@ -153,7 +153,7 @@ public class FormAutoServlet extends HttpServlet {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-						    	
+						    	System.out.println(proprietario);
 							    
 							    try{
 							    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);

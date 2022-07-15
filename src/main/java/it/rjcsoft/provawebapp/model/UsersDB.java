@@ -70,7 +70,7 @@ public class UsersDB {
 	}
 	
 	public ResultSet SelectUser2(String cf) throws SQLException {
-		PreparedStatement prst = this.con.prepareStatement(QuerySelectUser);
+		PreparedStatement prst = this.con.prepareStatement(QuerySelectUser2);
 		prst.setString(1, cf);
 		prst.execute();
 		ResultSet rs = prst.getResultSet();
