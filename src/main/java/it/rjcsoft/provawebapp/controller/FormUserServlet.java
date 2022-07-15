@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -123,10 +124,11 @@ public class FormUserServlet extends HttpServlet {
 							    	error+="Numero non intero \n";
 							    }
 
-							    
+							  
+								String encodedPwd = Base64.getEncoder().encodeToString(password.getBytes());
 							    try {
 							    			
-									user.InsertUser2(email,password,nome, cognome, cf,datanascita_cast,ruolo_cast);
+									user.InsertUser2(email,encodedPwd,nome, cognome, cf,datanascita_cast,ruolo_cast);
 	
 							    } catch (SQLException e) {
 									// TODO Auto-generated catch block
