@@ -26,7 +26,7 @@
   <h1 class="w3-xlarge w3-xlargecolor">HOME PAGE</h1>
 	  <h3 class="w3-xlarge">Benvenuto ${nome } ${cognome }</h3>
 	<div style="display: flex;justify-content: center;">
-	  <h2 class="w3-large" style="display: flex;align-items: center;padding: 0px 1vh">Ruolo: <p style="color: red; padding: 0px 1vh"> ${ruolo }</p></h2>
+	  <h2 class="w3-large" style="display: flex;align-items: center;padding: 0px 1vh">Ruolo: <p style="color: green; padding: 0px 1vh"> ${ruolo }</p></h2>
   	</div>
   <div class="w3-padding-32">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>
