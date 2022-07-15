@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+6<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 		<link rel="stylesheet" href="./css/style.css">
+		<link rel="stylesheet" href="./js/javascript.js">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		</head>
@@ -22,23 +23,35 @@
 		</style>
 	</head>
 	<body>
-	
-		<!-- !PAGE CONTENT! -->
+
+	<!-- !PAGE CONTENT! -->
 		<div class="w3-content" style="max-width:1500px">
 		<!-- Header -->
 		<header class="w3-panel w3-center w3-opacity" style="padding:100px 16px 10px 16px">
-		  <h1 class="w3-xlarge w3-xlargecolor">VISUALIZZA TABELLE</h1>
-		  <h3>Sei nella sezione Visualizza, scorri per vedere la stampa delle tabelle</h3>
+		  <h1 class="w3-xlarge w3-xlargecolor">VISUALIZZA AUTO ASSICURATE</h1>
+		  <h3>Sei nella sezione Visualizza, scorri per vedere le auto assicurate	</h3>
 		</header>
 		
 		<!-- End Page Content -->
 		</div>
-
+		<style>
+		
+			.my-custom-scrollbar {
+			position: relative;
+			height: 200px;
+			overflow: auto;
+			}
+			.table-wrapper-scroll-y {
+			display: block;
+			}
+		
+		</style>
 		<br><br>
 				<center>
 					<h1>Tabella Auto</h1>
-					<table class="w3-table-all w3-centered" style="width:70%">
-						<tr>
+				<div class="table-wrapper-scroll-y my-custom-scrollbar">
+					<table class="w3-table-all w3-centered" style="width:70%" >
+				<tr>
 							<th>ID</th>
 							<th>Marca</th>
 							<th>Modello</th>
@@ -62,14 +75,15 @@
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
 				    	</tr>
 				    	</c:forEach>
-					</table>
+				   </div>
+		</table>
 					</center>
 					<br><br>
-					
 					<c:if test="${ruolo == 'Admin' }">
 						<center>
 						<th>
 						<h1>Tabella User</h1>
+					<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						<table class="w3-table-all w3-centered" style="width:60%">
 							<tr>
 								<th>ID</th>
@@ -88,6 +102,7 @@
 					    	</tr>
 					    	</c:forEach>
 						</table>
+					</div>
 						</center>
 					</c:if>
 	<br></br>			

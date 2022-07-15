@@ -132,6 +132,18 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	</form>
 	</div>
 </div>
+	<br><br><br><br>
+	<br><br><br>
+	<footer class="w3-container w3-padding-64 w3-center w3-large" style= "color: white; background-color:#4d94ff"> 
+	  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+	  <i class="fa fa-instagram w3-hover-opacity"></i>
+	  <i class="fa fa-snapchat w3-hover-opacity"></i>
+	  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+	  <i class="fa fa-twitter w3-hover-opacity"></i>
+	  <i class="fa fa-linkedin w3-hover-opacity"></i>
+	  <p>Created by <a>rjc soft</a></p>
+	</footer>
+	
 </body>
 </html>
 	
