@@ -72,7 +72,8 @@
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
 				            <td>
-				            	<form action="/Provawebapp/ModificaAuto" method="POST">
+				            <div class="w3-panel w3-center w3-opacity">
+				            	<form action="/Provawebapp/ModificaAuto" method="POST" >
 				            		<input type="hidden" name="marca" value="${a.marca }">
 				            		<input type="hidden" name="modello" value="${a.modello }">
 				            		<input type="hidden" name="prezzo" value="${a.prezzo_auto }">
@@ -81,6 +82,7 @@
 				            		<input type="hidden" name="f_polizza" value="${a.fine_polizza }">
 				            		<input type="submit" value="MODIFICA">
 				            	</form>
+				            </div>
 				            </td>
 				    	</tr>
 				    	</c:forEach>
