@@ -23,21 +23,21 @@
 	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
 	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
 		<label for="idNome">Nome:</label><br>
-		<input id="idNome" name="Nome" type="text"><br><br>
+		<input id="idNome" name="nome" type="text"><br><br>
 		<label for="idCognome">Cognome:</label><br>
-		<input id="idCognome" name="Cognome" type="text"><br><br>
+		<input id="idCognome" name="cognome" type="text"><br><br>
 		<label for="idCodiceFiscale">CodiceFiscale:</label><br>
-		<input id="idCodiceFiscale" name="CodiceFiscale" type="text"><br><br>
+		<input id="idCodiceFiscale" name="cf" type="text"><br><br>
 		<label for="idRuolo">Ruolo:</label><br>
-		<input id="idRuolo" name="Ruolo" type="text">
+		<input id="idRuolo" name="ruoloInput" type="text">
 		<label for="idEmail">Email:</label><br>
-		<input id="idEmail" name="Email" type="text">
+		<input id="idEmail" name="email" type="text">
 		<br><br>
 		<label for="idPassword">Password:</label><br>
-		<input id="idPassword" name="Password" type="text"><br><br>
+		<input id="idPassword" name="password" type="text"><br><br>
 		
 		<label for="idDataNascita">DataNascita:</label><br>
-		 <br><input type="date" id="DataNascita" name="DataNascita"  value="yyyy-mm-dd"><br><br>
+		 <br><input type="date" id="DataNascita" name="datanascita"  value="yyyy-mm-dd"><br><br>
 		<br>	
 				<div style="display: flex; justify-content: center; width: auto">
 					<input type="reset" class="button-40" >
