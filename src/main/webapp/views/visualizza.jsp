@@ -66,7 +66,7 @@
 				    		<td>${a.marca}</td>
 				    		<td>${a.modello}</td>
 				    		<td>${a.targa}</td>
-				    		<td>${a.cf}</td>
+				    		<td>${a.CF}</td>
 				    		<td>${a.prezzo_auto}</td>
 				    		<td>${a.datarevisione}</td>
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
