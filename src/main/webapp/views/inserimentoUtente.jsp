@@ -21,7 +21,7 @@
       </c:if>
 	
 	<div class="w3-opacity" style="display: flex; justify-content: center; width: 100%">
-	<form method="POST" action="/Provawebapp/FormAutoServlet" style="width:30%;">
+	<form method="POST" action="/Provawebapp/FormUserServlet" style="width:30%;">
 		<label for="idNome">Nome:</label><br>
 		<input id="idNome" name="nome" type="text"><br><br>
 		<label for="idCognome">Cognome:</label><br>
@@ -30,6 +30,10 @@
 		<input id="idCodiceFiscale" name="cf" type="text"><br><br>
 		<label for="idRuolo">Ruolo:</label><br>
 		<input id="idRuolo" name="ruoloInput" type="text">
+		<select name="ruoloInput">
+			<option value="1">Admin</option>
+			<option value="2">Guest</option>
+		</select>
 		<label for="idEmail">Email:</label><br>
 		<input id="idEmail" name="email" type="text">
 		<br><br>
