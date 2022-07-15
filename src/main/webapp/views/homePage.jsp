@@ -24,15 +24,12 @@
   <h1 class="w3-xlarge w3-xlargecolor">HOME PAGE</h1>
   <h3 class="w3-xlarge">Benvenuto sul sito RJC Assicurazione</h3>
   <div class="w3-padding-32">
-      		<form action="/Provawebapp/MainServlet">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>
-		</form>
-		<form action="/Provawebapp/Inserimento">
+
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento</button></a></div>
-		</form>
-			<form action="./views/login.jsp">
-			<div style="display: flex; justify-content: center; width: auto"><a href="./views/login.jsp"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
-		</form>
+
+			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Logout"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
+
   </div>
 </header>
   

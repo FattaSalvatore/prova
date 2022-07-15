@@ -34,6 +34,7 @@ public class FormAutoServlet extends HttpServlet {
 
 	private static final String errorPage= "/views/error.jsp"; 
 	private static final String homePage= "/Servlet";
+	private static final String loginPage= "/";
 
        
     /**
@@ -68,130 +69,134 @@ public class FormAutoServlet extends HttpServlet {
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
 		 System.out.println(ruolo);
-		 if(ruolo.equals("Admin")) {
-			request.setAttribute("ruolo",ruolo);
-			disp=request.getRequestDispatcher(homePage);
-		 
-			    AutoDB auto = new AutoDB(conn);
-			    
-			    String marca=request.getParameter("marca");
-			    String modello=request.getParameter("modello");
-			    String targa=request.getParameter("targa");
-			    String proprietario=request.getParameter("proprietario");
-			    String prezzo_auto=request.getParameter("prezzo");
-			    String datarevisione=request.getParameter("revisione");
-			    String inizio_polizza=request.getParameter("i_polizza");
-			    String fine_polizza=request.getParameter("f_polizza");
-			   
-			    if(marca==null || marca.isEmpty() || 
-		 	       modello==null || modello.isEmpty() ||
-		 	       targa==null || targa.isEmpty() ||
-		 	       proprietario==null || proprietario.isEmpty() ||
-		 	       prezzo_auto==null || prezzo_auto.isEmpty() ||
-		 	       datarevisione==null || datarevisione.isEmpty() ||
-		 	       inizio_polizza==null || inizio_polizza.isEmpty() ||
-		 	       fine_polizza==null || fine_polizza.isEmpty()){
+		 if(ruolo == null) {
+			 disp = request.getRequestDispatcher (loginPage);
+		 }else {
+			 if(ruolo.equals("Admin")) {
+					request.setAttribute("ruolo",ruolo);
+					disp=request.getRequestDispatcher(homePage);
+				 
+					    AutoDB auto = new AutoDB(conn);
+					    
+					    String marca=request.getParameter("marca");
+					    String modello=request.getParameter("modello");
+					    String targa=request.getParameter("targa");
+					    String proprietario=request.getParameter("proprietario");
+					    String prezzo_auto=request.getParameter("prezzo");
+					    String datarevisione=request.getParameter("revisione");
+					    String inizio_polizza=request.getParameter("i_polizza");
+					    String fine_polizza=request.getParameter("f_polizza");
+					   
+					    if(marca==null || marca.isEmpty() || 
+				 	       modello==null || modello.isEmpty() ||
+				 	       targa==null || targa.isEmpty() ||
+				 	       proprietario==null || proprietario.isEmpty() ||
+				 	       prezzo_auto==null || prezzo_auto.isEmpty() ||
+				 	       datarevisione==null || datarevisione.isEmpty() ||
+				 	       inizio_polizza==null || inizio_polizza.isEmpty() ||
+				 	       fine_polizza==null || fine_polizza.isEmpty()){
 
-					UsersDB user = new UsersDB(conn);
-					
-					ArrayList<User> users = null;
-					try {
-						users = user.selectAllUsers();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					request.setAttribute("proprietari", users);
-			    	
+							UsersDB user = new UsersDB(conn);
+							
+							ArrayList<User> users = null;
+							try {
+								users = user.selectAllUsers();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							request.setAttribute("proprietari", users);
+					    	
+					    	disp = request.getRequestDispatcher (errorPage);
+					    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
+							disp.forward(request,response);
+					    }else {
+					    	
+					    	marca=marca.trim();
+						    modello=modello.trim();
+						    targa=targa.trim();
+						    proprietario=proprietario.trim();
+						    prezzo_auto=prezzo_auto.trim();
+						    datarevisione=datarevisione.trim();
+						    inizio_polizza=inizio_polizza.trim();
+						    fine_polizza=fine_polizza.trim();
+						    Date datarevisione_cast=null;
+						    
+						    String errori=null;
+						    
+						    int proprietario_casted=0;
+						   
+						    double prezzo_auto_casted=0;
+						    
+						    Timestamp inizio_polizza_cast=null;
+						    Timestamp fine_polizza_cast=null;
+						    try {
+						    	
+						        datarevisione_cast=StringToDate(datarevisione);
+						    } catch (ParseException e) {
+								// TODO Auto-generated catch block
+						    	errori+="Formato data revisione errato deve essere: yyyy-MM-dd \n";
+						    	
+							}  
+						    
+						    try {
+						    	
+						    	inizio_polizza=inizio_polizza+" 00:00:00.0";
+						    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
+						    } catch (ParseException e) {
+								// TODO Auto-generated catch block
+						    	errori+="Formato data inizio polizza errato deve essere: yyyy-MM-dd \n";
+							}
+						    
+						    try {
+						    	fine_polizza=fine_polizza+" 23:59:59.999";
+						    	fine_polizza_cast=StringToTimestamp(fine_polizza);
+						    } catch (ParseException e) {
+								// TODO Auto-generated catch block
+						    	errori+="Formato data fine polizza errato deve essere: yyyy-MM-dd \n";
+							}
+						    
+						  
+						    try {
+						    	 proprietario_casted= Integer.parseInt(proprietario);
+						    } catch (NumberFormatException nfe) {
+						    	errori+="Numero non intero \n";
+						    }
+						    
+						    
+						    try{
+						    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
+						    }
+						    catch(NumberFormatException e){
+						    	errori+="Numero non double \n";
+						    }
+						    
+						    try {
+						    			
+								auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+
+						    } catch (SQLException e) {
+								// TODO Auto-generated catch block
+						    	errori+="Dati non insriti \n";
+							}
+						    
+						    if(errori!=null) {
+						    	request.setAttribute("Error", errori);
+						    	disp = request.getRequestDispatcher (errorPage);
+								
+						    }else {
+						    	disp = request.getRequestDispatcher (homePage);
+						    }
+						    db.closeConnection(conn);
+							disp.forward(request,response);
+					    }
+				}else{
+					error="Non sei autorizzato ad accedere";
+		       		request.setAttribute("Error", error);
 			    	disp = request.getRequestDispatcher (errorPage);
-			    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
-					disp.forward(request,response);
-			    }else {
-			    	
-			    	marca=marca.trim();
-				    modello=modello.trim();
-				    targa=targa.trim();
-				    proprietario=proprietario.trim();
-				    prezzo_auto=prezzo_auto.trim();
-				    datarevisione=datarevisione.trim();
-				    inizio_polizza=inizio_polizza.trim();
-				    fine_polizza=fine_polizza.trim();
-				    Date datarevisione_cast=null;
-				    
-				    String errori=null;
-				    
-				    int proprietario_casted=0;
-				   
-				    double prezzo_auto_casted=0;
-				    
-				    Timestamp inizio_polizza_cast=null;
-				    Timestamp fine_polizza_cast=null;
-				    try {
-				    	
-				        datarevisione_cast=StringToDate(datarevisione);
-				    } catch (ParseException e) {
-						// TODO Auto-generated catch block
-				    	errori+="Formato data revisione errato deve essere: yyyy-MM-dd \n";
-				    	
-					}  
-				    
-				    try {
-				    	
-				    	inizio_polizza=inizio_polizza+" 00:00:00.0";
-				    	inizio_polizza_cast=StringToTimestamp(inizio_polizza);
-				    } catch (ParseException e) {
-						// TODO Auto-generated catch block
-				    	errori+="Formato data inizio polizza errato deve essere: yyyy-MM-dd \n";
-					}
-				    
-				    try {
-				    	fine_polizza=fine_polizza+" 23:59:59.999";
-				    	fine_polizza_cast=StringToTimestamp(fine_polizza);
-				    } catch (ParseException e) {
-						// TODO Auto-generated catch block
-				    	errori+="Formato data fine polizza errato deve essere: yyyy-MM-dd \n";
-					}
-				    
-				  
-				    try {
-				    	 proprietario_casted= Integer.parseInt(proprietario);
-				    } catch (NumberFormatException nfe) {
-				    	errori+="Numero non intero \n";
-				    }
-				    
-				    
-				    try{
-				    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
-				    }
-				    catch(NumberFormatException e){
-				    	errori+="Numero non double \n";
-				    }
-				    
-				    try {
-				    			
-						auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
-
-				    } catch (SQLException e) {
-						// TODO Auto-generated catch block
-				    	errori+="Dati non insriti \n";
-					}
-				    
-				    if(errori!=null) {
-				    	request.setAttribute("Error", errori);
-				    	disp = request.getRequestDispatcher (errorPage);
-						
-				    }else {
-				    	disp = request.getRequestDispatcher (homePage);
-				    }
-				    db.closeConnection(conn);
-					disp.forward(request,response);
-			    }
-		}else{
-			error="Non sei autorizzato ad accedere";
-       		request.setAttribute("Error", error);
-	    	disp = request.getRequestDispatcher (errorPage);
-	    	disp.forward(request, response);
-		}
+			    	disp.forward(request, response);
+				}
+		 }
        
 	}
 	
