@@ -155,37 +155,44 @@ public class FormAutoServlet extends HttpServlet {
 						    	errori+="Formato data fine polizza errato deve essere: yyyy-MM-dd \n";
 							}
 						    
-						  
-						    try {
-						    	 proprietario_casted= Integer.parseInt(proprietario);
-						    } catch (NumberFormatException nfe) {
-						    	errori+="Numero non intero \n";
-						    }
-						    
-						    
-						    try{
-						    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
-						    }
-						    catch(NumberFormatException e){
-						    	errori+="Numero non double \n";
-						    }
-						    
-						    try {
-						    			
-								auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+						    if(inizio_polizza_cast.before(fine_polizza_cast)) {
+						    	try {
+							    	 proprietario_casted= Integer.parseInt(proprietario);
+							    } catch (NumberFormatException nfe) {
+							    	errori+="Numero non intero \n";
+							    }
+							    
+							    
+							    try{
+							    	prezzo_auto_casted=Double.parseDouble(prezzo_auto);
+							    }
+							    catch(NumberFormatException e){
+							    	errori+="Numero non double \n";
+							    }
+							    
+							    try {
+							    			
+									auto.InsertAuto(marca, modello, targa,proprietario_casted ,prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
 
-						    } catch (SQLException e) {
-								// TODO Auto-generated catch block
-						    	errori+="Dati non insriti \n";
-							}
-						    
-						    if(errori!=null) {
+							    } catch (SQLException e) {
+									// TODO Auto-generated catch block
+							    	errori+="Dati non insriti \n";
+								}
+							    
+							    if(errori!=null) {
+							    	request.setAttribute("Error", errori);
+							    	disp = request.getRequestDispatcher (errorPage);
+									
+							    }else {
+							    	disp = request.getRequestDispatcher (homePage);
+							    }
+						    }else {
+						    	errori+="La data di fine polizza è prima di inizio polizza \n";
 						    	request.setAttribute("Error", errori);
 						    	disp = request.getRequestDispatcher (errorPage);
-								
-						    }else {
-						    	disp = request.getRequestDispatcher (homePage);
 						    }
+						  
+						    
 						    db.closeConnection(conn);
 							disp.forward(request,response);
 					    }

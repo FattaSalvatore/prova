@@ -1,6 +1,7 @@
 package it.rjcsoft.provawebapp.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,12 +28,24 @@ public class UsersDB {
 		this.con = con;
 	}
 	
-	public boolean InsertUser(String name, String surname, String cf, String BirthDate) throws SQLException {
+	public boolean InsertUser(String name, String surname, String cf, Date BirthDate) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertUser);
 		prst.setString(1, name);
 		prst.setString(2, surname);
 		prst.setString(3, cf);
-		prst.setString(4, BirthDate);
+		prst.setDate(4, BirthDate);
+		return prst.execute();
+	}
+	
+	public boolean InsertUser2(String email, String pwd, String name, String surname, String cf, Date BirthDate,String ruolo) throws SQLException {
+		PreparedStatement prst = this.con.prepareStatement(QueryInsertUser);
+		prst.setString(1, email);
+		prst.setString(2, pwd);
+		prst.setString(3, name);
+		prst.setString(4, surname);
+		prst.setString(5, cf);
+		prst.setDate(6, BirthDate);
+		prst.setString(7, ruolo);
 		return prst.execute();
 	}
 	
@@ -40,7 +53,6 @@ public class UsersDB {
 	public boolean DeleteUser(int id) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryDeleteUser);
 		prst.setInt(1, id);
-		int i = 0;
 		return prst.execute();
 	}
 	
