@@ -73,8 +73,8 @@ public class FormAutoServlet extends HttpServlet {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
 			 if(ruolo.equals("Admin")) {
-					request.setAttribute("ruolo",ruolo);
-					disp=request.getRequestDispatcher(homePage);
+						request.setAttribute("ruolo",ruolo);
+						disp=request.getRequestDispatcher(homePage);
 				 
 					    AutoDB auto = new AutoDB(conn);
 					    
@@ -197,7 +197,6 @@ public class FormAutoServlet extends HttpServlet {
 			    	disp.forward(request, response);
 				}
 		 }
-       
 	}
 	
 	private Date StringToDate(String ToBeConverted)throws  ParseException{
