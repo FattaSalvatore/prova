@@ -38,13 +38,12 @@
 		
 			.my-custom-scrollbar {
 			position: relative;
-			height: 400px;
+			height: 300px;
 			overflow: auto;
 			}
 			.table-wrapper-scroll-y {
 			display: block;
 			}
-			;
 		</style>
 		<br><br>
 				<center>
@@ -96,7 +95,6 @@
 						<center>
 						<th>
 						<h1>Tabella User</h1>
-					<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						<table class="w3-table-all w3-centered" style="width:60%">
 							<tr>
 								<th>Nome</th>
@@ -113,7 +111,6 @@
 					    	</tr>
 					    	</c:forEach>
 						</table>
-					</div>
 						</center>
 					</c:if>
 			<header class="w3-panel w3-center w3-opacity" style="padding:5px 5px">	
