@@ -18,12 +18,65 @@
 	</head>
 	<body>
 
+<style>
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  
+}
+.wrapper .dynamic-txts{
+  height: 100%;
+  line-height: 0px;
+  overflow: hidden;
+}
+.dynamic-txts li{
+  list-style: none;
+  font-size: 60px;
+  font-weight: 500;
+  position: relative;
+  animation: slide 12s steps(4) infinite;
+}
+@keyframes slide {
+  100%{
+    top: -360px;
+  }
+}
+.dynamic-txts li span{
+  position: relative;
+  line-height: 90px;
+}
+.dynamic-txts li span::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 120%;
+  width: 100%;
+  background: white;
+  border-left: 2px solid green;
+  animation: typing 3s steps(10) infinite;
+}
+
+@keyframes typing {
+  40%, 60%{
+    left: calc(100% + 40px);
+  }
+}
+</style>
+
+
+
 <!-- !PAGE CONTENT! -->
 <div class="w3-content" style="max-width:1500px">
 
 <!-- Header -->
 <header class="w3-panel w3-center w3-opacity" style="padding:80px 14px">
-  <h1 class="w3-xlarge w3-xlargecolor">HOME PAGE</h1>
+  	<div class="wrapper">
+    <ul class="dynamic-txts" style="padding-inline-start: 0px">
+      <li><span>Home Page</span></li>
+    </ul>
+  </div>
+
   <h3 class="w3-xlarge">Benvenuto <b> ${nome } ${cognome }</b> sul sito RJC Assicurazione  </h3>
 	<div style="display: flex;justify-content: center;">
 	  <h2 class="w3-large" style="display: flex;align-items: center;padding: 0px 1vh">Ruolo: <b style="color: green; padding: 0px 1vh"> ${ruolo }</b></h2>
