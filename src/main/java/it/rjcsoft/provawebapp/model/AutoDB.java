@@ -11,13 +11,16 @@ import java.sql.Timestamp;
 import java.sql.Date;
 public class AutoDB {
 
+	
+
 	private Connection con;
 	
+	private String QuerySelectAuto2 = "SELECT * FROM test1_auto WHERE id = ?";
 	private String QueryInsertAuto="Insert into test1_auto (marca, modello, targa, proprietario, prezzo_auto, datarevisione, inizio_polizza, fine_polizza ) VALUES (?,?,?,?,?,?,?,?)";
 	private String QueryDeleteAuto="DELETE FROM test1_auto WHERE targa = ?";
 	private String QuerySelectAuto="Select ta.*, tu.cf from test1_auto ta INNER JOIN test1_users tu ON tu.id=ta.proprietario WHERE proprietario = ?";
 	private String QuerySelectAutoLimitOffset="Select ta.*, tu.cf from test1_auto ta INNER JOIN test1_users tu ON tu.id=ta.proprietario LIMIT ? OFFSET ?";
-	private String QueryUpdateAuto="Update test1_auto set  proprietario=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
+	private String QueryUpdateAuto="Update test1_auto set  marca=?, modello=?, prezzo_auto=?, datarevisione=?, inizio_polizza=?, fine_polizza=? where id=?";
 	
 	private String id="id";
 	private String marca="marca";
@@ -100,14 +103,21 @@ public class AutoDB {
 		
 	}
 	
-	public ResultSet UpdateAuto(String owner, String carPrice, String revisionDate, String startInsurancePolicy, String endInsurancePolicy, int id ) throws SQLException {
+	public Boolean UpdateAuto(String brand, String model, double prezzo_auto_casted, Date datarevisione_cast, Timestamp inizio_polizza_cast, Timestamp fine_polizza_cast, int id ) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryUpdateAuto); //Preparazione dello statement
-		prst.setString(1, owner);
-		prst.setString(2, carPrice);
-		prst.setString(3, revisionDate);
-		prst.setString(4, startInsurancePolicy);						// Binding
-		prst.setString(5, endInsurancePolicy);
-		prst.setInt(6, id);
+		prst.setString(1, brand);
+		prst.setString(2, model);
+		prst.setDouble(3, prezzo_auto_casted);
+		prst.setDate(4, datarevisione_cast);
+		prst.setTimestamp(5, inizio_polizza_cast);					
+		prst.setTimestamp(6, fine_polizza_cast);
+		prst.setInt(7, id);
+		return prst.execute(); //return dell'update (ritorna la classe ResultSet)
+	}
+
+	public ResultSet SelectAuto2(int idAuto) throws SQLException {
+		PreparedStatement prst = this.con.prepareStatement(QuerySelectAuto2); //Preparazione dello statement
+		prst.setInt(1, idAuto);
 		prst.execute();
 		ResultSet rs = prst.getResultSet(); //Esecuzione dell'UPDATE
 		if(!rs.next()) {
