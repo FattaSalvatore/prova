@@ -85,7 +85,7 @@
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>
 			<c:if test="${ruolo == 'Admin' }">
 				<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento Vettura</button></a></div>
-				<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/FormUserServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento Utente</button></a></div>
+				<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento Utente</button></a></div>
 			</c:if>
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Logout"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button" onClick="confirmAction()">Log-out</button></a></div>
 					<script>

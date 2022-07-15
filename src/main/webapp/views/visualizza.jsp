@@ -116,8 +116,6 @@
 					</div>
 						</center>
 					</c:if>
-	<br></br>			
-	
 			<header class="w3-panel w3-center w3-opacity" style="padding:5px 5px">	
 		  		<div class="w3-padding-32">
 		      		<form action="/Provawebapp/Home">
