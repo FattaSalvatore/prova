@@ -84,7 +84,7 @@ public class FormUserServlet extends HttpServlet {
 					    String ruoloInput=request.getParameter("ruoloInput");
 					    String email=request.getParameter("email");
 					    String password=request.getParameter("password");
-					   
+					    int ruolo_cast=0;
 					    if(nome==null || nome.isEmpty() || 
 					       cognome==null || cognome.isEmpty() ||
 					       cf==null || cf.isEmpty() ||
@@ -93,15 +93,6 @@ public class FormUserServlet extends HttpServlet {
 					       email==null || email.isEmpty() ||
 					       password==null || password.isEmpty()){
 							
-							ArrayList<User> users = null;
-							try {
-								users = user.selectAllUsers();
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							request.setAttribute("proprietari", users);
-					    	
 					    	disp = request.getRequestDispatcher (errorPage);
 					    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
 							disp.forward(request,response);
@@ -125,11 +116,17 @@ public class FormUserServlet extends HttpServlet {
 							    	error+="Formato data revisione errato deve essere: yyyy-MM-dd \n";
 							    	
 								}  
-							        
+							    
+							    try {
+							    	ruolo_cast= Integer.parseInt(ruolo);
+							    } catch (NumberFormatException nfe) {
+							    	error+="Numero non intero \n";
+							    }
+
 							    
 							    try {
 							    			
-									user.InsertUser(email,password,nome, cognome, cf,datanascita_cast,ruolo);
+									user.InsertUser2(email,password,nome, cognome, cf,datanascita_cast,ruolo_cast);
 	
 							    } catch (SQLException e) {
 									// TODO Auto-generated catch block
@@ -137,7 +134,7 @@ public class FormUserServlet extends HttpServlet {
 								}
 							    
 							   
-							    if(error!=null) {
+							    if(!error.equals("")) {
 							    	request.setAttribute("Error", error);
 							    	disp = request.getRequestDispatcher (errorPage);
 									

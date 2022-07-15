@@ -14,6 +14,7 @@ public class UsersDB {
 	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select * from test1_users tu JOIN test1_roles tr ON tr.id=ruolo_id JOIN test1_credenziali tc ON tc.iduser=tu.id WHERE tu.id = ?";
+	private String QuerySelectUser2="Select * from test1_users tu WHERE tu.cf = ?";
 	private String QueryUpdateUser="Update test1_users set nome=?, cf=? where id=?";
 	private String QuerySelectAllUsers="Select * from test1_users tu INNER JOIN test1_roles tr ON tr.id=tu.ruolo_id INNER JOIN test1_credenziali tc ON tc.iduser = tu.id";
 	
@@ -37,15 +38,15 @@ public class UsersDB {
 		return prst.execute();
 	}
 	
-	public boolean InsertUser2(String email, String pwd, String name, String surname, String cf, Date BirthDate,String ruolo) throws SQLException {
+	public boolean InsertUser2(String email, String pwd, String name, String surname, String cf, Date BirthDate,int ruolo) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertUser);
-		prst.setString(1, email);
-		prst.setString(2, pwd);
-		prst.setString(3, name);
-		prst.setString(4, surname);
-		prst.setString(5, cf);
-		prst.setDate(6, BirthDate);
-		prst.setString(7, ruolo);
+		CredenzialiDB cred=new CredenzialiDB(this.con);
+		cred.insertCredenziali(email, pwd, ruolo);
+		prst.setString(1, name);
+		prst.setString(2, surname);
+		prst.setString(3, cf);
+		prst.setDate(4, BirthDate);
+		
 		return prst.execute();
 	}
 	
@@ -60,6 +61,17 @@ public class UsersDB {
 	public ResultSet SelectUser(int id) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QuerySelectUser);
 		prst.setInt(1, id);
+		prst.execute();
+		ResultSet rs = prst.getResultSet();
+		if(!rs.next()) {
+			rs = null;
+		}
+		return rs;
+	}
+	
+	public ResultSet SelectUser2(String cf) throws SQLException {
+		PreparedStatement prst = this.con.prepareStatement(QuerySelectUser);
+		prst.setString(1, cf);
 		prst.execute();
 		ResultSet rs = prst.getResultSet();
 		if(!rs.next()) {
