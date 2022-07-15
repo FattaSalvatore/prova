@@ -1,4 +1,4 @@
-6<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="./style.css" rel="stylesheet" type="text/css">
-		<title> visualizza </title>
+		<title>visualizza </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 		<link rel="stylesheet" href="./css/style.css">

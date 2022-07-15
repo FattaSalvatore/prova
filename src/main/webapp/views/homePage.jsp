@@ -23,21 +23,33 @@
 
 <!-- Header -->
 <header class="w3-panel w3-center w3-opacity" style="padding:80px 14px">
-
   <h1 class="w3-xlarge w3-xlargecolor">HOME PAGE</h1>
-  <h3 class="w3-xlarge">Benvenuto sul sito RJC Assicurazione</h3>
-  <br>
-	  <h3 class="w3-xlarge">Benvenuto ${nome } ${cognome }</h3>
+  <h3 class="w3-xlarge">Benvenuto <b> ${nome } ${cognome }</b> sul sito RJC Assicurazione  </h3>
 	<div style="display: flex;justify-content: center;">
-	  <h2 class="w3-large" style="display: flex;align-items: center;padding: 0px 1vh">Ruolo: <p style="color: green; padding: 0px 1vh"> ${ruolo }</p></h2>
+	  <h2 class="w3-large" style="display: flex;align-items: center;padding: 0px 1vh">Ruolo: <b style="color: green; padding: 0px 1vh"> ${ruolo }</b></h2>
   	</div>
   <div class="w3-padding-32">
 			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/MainServlet"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Visualizza Tabella</button></a></div>
 			<c:if test="${ruolo == 'Admin' }">
 				<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Inserimento"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Inserimento</button></a></div>
 			</c:if>
-			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Logout"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button">Log-out</button></a></div>
-
+			<div style="display: flex; justify-content: center; width: auto"><a href="/Provawebapp/Logout"><button class="button-30" style="width: 100%; margin-bottom: 5vh;" role="button" onClick="confirmAction()">Log-out</button></a></div>
+					<script>
+						//funzione aler
+				      function confirmAction() {
+				        let confirmAction = confirm("Sei sicuro di voler effettuare il Log-out");
+				        if (confirmAction) {
+				        	//true
+				          alert("premi ok per confermare");
+				        } else {
+				        	//false
+				        	alert("vuoi annullare l'opzione?");
+				        	//killo il processo della form
+			        	    event.preventDefault();
+				        	
+				        }
+				      }
+				    </script>
   </div>
 </header>
   
