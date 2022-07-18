@@ -72,7 +72,7 @@ public class FormUserServlet extends HttpServlet {
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
-			 if(ruolo.equals("Admin")) {
+			 if("Admin".equals(ruolo)) {
 						request.setAttribute("ruolo",ruolo);
 						UsersDB user = new UsersDB(conn);
 					    
@@ -141,7 +141,7 @@ public class FormUserServlet extends HttpServlet {
 								}
 							    
 							   
-							    if(!error.equals("")) {
+							    if(error.isEmpty()) {
 							    	request.setAttribute("Error", error);
 							    	disp = request.getRequestDispatcher (errorPage);
 									
