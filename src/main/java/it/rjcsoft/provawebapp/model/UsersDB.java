@@ -40,7 +40,7 @@ public class UsersDB {
 	
 	public boolean InsertUser2(String email, String pwd, String name, String surname, String cf, Date BirthDate,int ruolo) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertUser);
-		PreparedStatement prstId = this.con.prepareStatement(QuerySelectUser2);
+		ResultSet rs=null;
 		CredenzialiDB cred=new CredenzialiDB(this.con);
 		
 		prst.setString(1, name);
@@ -48,12 +48,21 @@ public class UsersDB {
 		prst.setString(3, cf);
 		prst.setDate(4, BirthDate);
 		prst.setInt(5, ruolo);
+		boolean insertuser2res=prst.execute();
+		
+		
+		PreparedStatement prstId = this.con.prepareStatement(QuerySelectUser2);
+		System.out.println(cf);
 		prstId.setString(1,cf);
 		prstId.execute();
-		ResultSet rs=prstId.getResultSet();
-		cred.insertCredenziali(email, pwd, rs.getString("id"));
+		rs=prstId.getResultSet();
 		rs.next();
-		return prst.execute();
+		String id=rs.getString("id");
+		
+		System.out.println(id);
+		cred.insertCredenziali(email, pwd, id);
+		
+		return insertuser2res;
 	}
 	
 
