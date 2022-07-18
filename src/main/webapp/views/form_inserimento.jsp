@@ -36,7 +36,11 @@
 		<label for="idTarga">Targa:</label><br>
 		<input id="idTarga" name="targa" type="text"><br><br>
 		<label for="idProprietario">Proprietario:</label><br>
-		<input id="proprietario" name="proprietario" type="text">
+		<select id="proprietario" name="proprietario">
+			<c:forEach var = "p" items="${proprietari}">
+				<option value= "${p.cf }">${p.nome } ${p.cognome } ${p.cf }</option>
+			</c:forEach>
+		</select>
 		<br><br>
 		<label for="idPrezzo">Prezzo:</label><br>
 		<input id="idPrezzo" name="prezzo" type="text"><br><br>
