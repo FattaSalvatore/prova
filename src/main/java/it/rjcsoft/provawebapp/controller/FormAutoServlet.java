@@ -50,16 +50,14 @@ public class FormAutoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		
@@ -194,9 +192,9 @@ public class FormAutoServlet extends HttpServlet {
 					error="Non sei autorizzato ad accedere";
 		       		request.setAttribute("Error", error);
 			    	disp = request.getRequestDispatcher (errorPage);
-			    	disp.forward(request, response);
 				}
 		 }
+		 disp.forward(request, response);
 	}
 	
 	private Date StringToDate(String ToBeConverted)throws  ParseException{
