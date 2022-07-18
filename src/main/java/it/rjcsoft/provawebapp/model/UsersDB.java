@@ -59,7 +59,6 @@ public class UsersDB {
 		rs.next();
 		String id=rs.getString("id");
 		
-		System.out.println(id);
 		cred.insertCredenziali(email, pwd, id);
 		
 		return insertuser2res;
