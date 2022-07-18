@@ -59,6 +59,7 @@ public class Servlet extends HttpServlet {
 						request.setAttribute("Lista", va);
 						
 						ArrayList<User> au = user.selectAllUsers();
+						au.forEach((n) -> System.out.println(n));
 						request.setAttribute("PersonaLista", au);
 						disp = request.getRequestDispatcher (Pagename);
 					} catch (SQLException e) {
@@ -83,6 +84,7 @@ public class Servlet extends HttpServlet {
 				 
 				 }
 		 }
+		 
 		 db.closeConnection(conn);
 		 disp.forward(request,response);
 		

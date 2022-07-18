@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UsersDB {
 	private Connection con;
-	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita) VALUES (?,?,?,?)";
+	private String QueryInsertUser="Insert into test1_users (nome, cognome, cf, datanascita, ruolo_id) VALUES (?,?,?,?,?)";
 	private String QueryDeleteUser="DELETE FROM test1_users WHERE id = ?";
 	private String QuerySelectUser="Select * from test1_users tu JOIN test1_roles tr ON tr.id=ruolo_id JOIN test1_credenziali tc ON tc.iduser=tu.id WHERE tu.id = ?";
 	private String QuerySelectUser2="Select * from test1_users tu WHERE tu.cf = ?";
@@ -40,13 +40,19 @@ public class UsersDB {
 	
 	public boolean InsertUser2(String email, String pwd, String name, String surname, String cf, Date BirthDate,int ruolo) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertUser);
+		PreparedStatement prstId = this.con.prepareStatement(QuerySelectUser2);
 		CredenzialiDB cred=new CredenzialiDB(this.con);
-		cred.insertCredenziali(email, pwd, ruolo);
+		
 		prst.setString(1, name);
 		prst.setString(2, surname);
 		prst.setString(3, cf);
 		prst.setDate(4, BirthDate);
-		
+		prst.setInt(5, ruolo);
+		prstId.setString(1,cf);
+		prstId.execute();
+		ResultSet rs=prstId.getResultSet();
+		cred.insertCredenziali(email, pwd, rs.getString("id"));
+		rs.next();
 		return prst.execute();
 	}
 	
@@ -101,7 +107,7 @@ public class UsersDB {
 		ResultSet rs = prst.getResultSet(); // Esecuzione della SELECT
 		while(rs.next()) {
 			lu.add(new User(rs.getInt(id),rs.getString(nome),rs.getString(cognome),rs.getString(cf),rs.getDate(datanascita), rs.getString(ruolo)));
-		
+			
 		}
 			
 		return (ArrayList<User>) lu;
