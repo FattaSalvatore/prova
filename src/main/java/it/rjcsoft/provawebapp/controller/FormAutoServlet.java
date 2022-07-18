@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -19,9 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import it.rjcsoft.provawebapp.model.AutoDB;
 import it.rjcsoft.provawebapp.model.DBdriver;
-import it.rjcsoft.provawebapp.model.User;
 import it.rjcsoft.provawebapp.model.UsersDB;
 import it.rjcsoft.provawebapp.services.CheckSession;
 
@@ -111,7 +111,7 @@ public class FormAutoServlet extends HttpServlet {
 						    fine_polizza=fine_polizza.trim();
 						    Date datarevisione_cast=null;
 						    
-						    String errori=null;
+						    String errori="";
 						    
 						    int proprietario_casted=0;
 						   
@@ -149,9 +149,11 @@ public class FormAutoServlet extends HttpServlet {
 						    	
 						    	try {
 									rs=userdb.SelectUser2(proprietario);
+									if(rs == null) {
+										errori += "Codice fiscale non registrato";
+									}
 								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
+									errori += "Errore nel recupero dati del clinte";
 								}
 						    	System.out.println(proprietario);
 							    
@@ -163,11 +165,10 @@ public class FormAutoServlet extends HttpServlet {
 							    }
 							    
 							    try {
-							    			
-									auto.InsertAuto(marca, modello, targa, rs.getInt("id"), prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
-
+							    	if(StringUtils.isBlank(errori)) {
+							    		auto.InsertAuto(marca, modello, targa, rs.getInt("id"), prezzo_auto_casted,  datarevisione_cast, inizio_polizza_cast, fine_polizza_cast);
+							    	}
 							    } catch (SQLException e) {
-									// TODO Auto-generated catch block
 							    	errori+="Dati non insriti \n";
 								}
 							    
