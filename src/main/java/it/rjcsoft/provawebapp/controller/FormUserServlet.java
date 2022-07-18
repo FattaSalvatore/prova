@@ -70,9 +70,12 @@ public class FormUserServlet extends HttpServlet {
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
 		 if(ruolo == null) {
+			 
 			 disp = request.getRequestDispatcher (loginPage);
+			 
 		 }else {
-			 if(ruolo.equals("Admin")) {
+			 
+			 if("Admin".equals(ruolo)) {
 						request.setAttribute("ruolo",ruolo);
 						UsersDB user = new UsersDB(conn);
 					    
@@ -84,6 +87,7 @@ public class FormUserServlet extends HttpServlet {
 					    String email=request.getParameter("email");
 					    String password=request.getParameter("password");
 					    int ruolo_cast=0;
+					    
 					    if(nome==null || nome.isEmpty() || 
 					       cognome==null || cognome.isEmpty() ||
 					       cf==null || cf.isEmpty() ||
@@ -141,7 +145,7 @@ public class FormUserServlet extends HttpServlet {
 								}
 							    
 							   
-							    if(!error.equals("")) {
+							    if(error.isEmpty()) {
 							    	request.setAttribute("Error", error);
 							    	disp = request.getRequestDispatcher (errorPage);
 									
