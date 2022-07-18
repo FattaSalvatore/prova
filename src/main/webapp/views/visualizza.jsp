@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="./style.css" rel="stylesheet" type="text/css">
-		<title>visualizza </title>
+		<title>Visualizza</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 		<link rel="stylesheet" href="./css/style.css">
@@ -59,7 +59,9 @@
 							<th>Data Revisione</th>
 							<th>Inizio Polizza</th>
 							<th>Fine Polizza</th>
-							<th>Modifica</th>
+							<c:if test="${ruolo == 'Admin' }">
+								<th>Modifica</th>
+							</c:if>
 						</tr>
 						<c:forEach var="a" items="${Lista}">
 						<tr>
@@ -71,6 +73,7 @@
 				    		<td>${a.datarevisione}</td>
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
+				            <c:if test="${ruolo == 'Admin' }">
 				            <td>
 				            <div class="w3-panel w3-center">
 				            	<form action="/Provawebapp/ModificaAuto" method="POST" >
@@ -85,6 +88,7 @@
 				            	</form>
 				            </div>
 				            </td>
+				            </c:if>
 				    	</tr>
 				    	</c:forEach>
 				   </div>
