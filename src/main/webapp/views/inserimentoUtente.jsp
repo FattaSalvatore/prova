@@ -34,7 +34,7 @@
 		<label for="idCodiceFiscale">CodiceFiscale:</label><br>
 		<input id="idCodiceFiscale" name="cf" type="text"><br><br>
 		<label for="idRuolo">Ruolo:</label><br>
-		<input id="idRuolo" name="ruoloInput" type="text">
+		<br>
 		<select name="ruoloInput">
 			<option value="1">Admin</option>
 			<option value="2">Guest</option>

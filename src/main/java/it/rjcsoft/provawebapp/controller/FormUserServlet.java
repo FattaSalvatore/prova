@@ -70,13 +70,14 @@ public class FormUserServlet extends HttpServlet {
 		 CheckSession cs= new CheckSession(session);
 		 String ruolo=cs.CheckSession();
 		 if(ruolo == null) {
+			 
 			 disp = request.getRequestDispatcher (loginPage);
+			 
 		 }else {
-			 if(ruolo.equals("Admin")) {
+			 
+			 if("Admin".equals(ruolo)) {
 						request.setAttribute("ruolo",ruolo);
-						disp=request.getRequestDispatcher(homePage);
-				 
-					    UsersDB user = new UsersDB(conn);
+						UsersDB user = new UsersDB(conn);
 					    
 					    String nome=request.getParameter("nome");
 					    String cognome=request.getParameter("cognome");
@@ -86,6 +87,7 @@ public class FormUserServlet extends HttpServlet {
 					    String email=request.getParameter("email");
 					    String password=request.getParameter("password");
 					    int ruolo_cast=0;
+					    
 					    if(nome==null || nome.isEmpty() || 
 					       cognome==null || cognome.isEmpty() ||
 					       cf==null || cf.isEmpty() ||
@@ -93,10 +95,16 @@ public class FormUserServlet extends HttpServlet {
 					       ruoloInput==null || ruoloInput.isEmpty() ||
 					       email==null || email.isEmpty() ||
 					       password==null || password.isEmpty()){
-							
+							System.out.println(nome);
+							System.out.println(cognome);
+							System.out.println(cf);
+							System.out.println(datanascita);
+							System.out.println(ruoloInput);
+							System.out.println(email);
+							System.out.println(password);
 					    	disp = request.getRequestDispatcher (errorPage);
 					    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
-							disp.forward(request,response);
+							
 					    }else {
 					    	
 						    	nome=nome.trim();
@@ -118,8 +126,9 @@ public class FormUserServlet extends HttpServlet {
 							    	
 								}  
 							    
+							  
 							    try {
-							    	ruolo_cast= Integer.parseInt(ruolo);
+							    	ruolo_cast= Integer.parseInt(ruoloInput);
 							    } catch (NumberFormatException nfe) {
 							    	error+="Numero non intero \n";
 							    }
@@ -131,12 +140,12 @@ public class FormUserServlet extends HttpServlet {
 									user.InsertUser2(email,encodedPwd,nome, cognome, cf,datanascita_cast,ruolo_cast);
 	
 							    } catch (SQLException e) {
-									// TODO Auto-generated catch block
-							    	error+="Dati non insriti \n";
+									e.printStackTrace();
+							    	error+="Dati non inseriti \n";
 								}
 							    
 							   
-							    if(!error.equals("")) {
+							    if(error.isEmpty()) {
 							    	request.setAttribute("Error", error);
 							    	disp = request.getRequestDispatcher (errorPage);
 									
@@ -147,15 +156,17 @@ public class FormUserServlet extends HttpServlet {
 							    }
 						  
 							    db.closeConnection(conn);
-								disp.forward(request,response);
+							
 					    }
 				}else{
 					error="Non sei autorizzato ad accedere";
 		       		request.setAttribute("Error", error);
 			    	disp = request.getRequestDispatcher (errorPage);
-			    	disp.forward(request, response);
+			    	
 				}
+			 
 		 }
+		 disp.forward(request,response);
 	}
 	
 	private Date StringToDate(String ToBeConverted)throws  ParseException{

@@ -25,7 +25,7 @@ import it.rjcsoft.provawebapp.model.UsersDB;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String Pagename2= "/Home";
-	private static final String Pagename= "/views/error.jsp"; 
+	private static final String Pagename= "/views/login.jsp"; 
 	
 	private static final String EMAIL = "email";
 	private static final String PWD = "pwd";
@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 	/**
@@ -67,45 +68,52 @@ public class LoginServlet extends HttpServlet {
 		String error="";
 		session=request.getSession();  
         session.invalidate();
-		if(email!=null || !email.isEmpty() || pwd!=null || !pwd.isEmpty()) {
+		if(email!=null && !email.isEmpty() || pwd!=null && !pwd.isEmpty()) {
 		
 			try {
 				 	ResultSet rsCredenziali = credenziali.selectCredenziali(email);
-					rs = user.SelectUser(rsCredenziali.getInt(FK_IDUSER));
-					rsCredenziali = null;
-			       	
-					if(rs!=null) {
-						
-						String dbinput = rs.getString(PWD);
-						String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
-						if(dbinput.equals(encodedString)) {
+					if(rsCredenziali != null) {
+					 	rs = user.SelectUser(rsCredenziali.getInt(FK_IDUSER));
+						rsCredenziali = null;
+				       	
+						if(rs!=null) {
 							
-
-							utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
-					        session = request.getSession(true);
-					        session.setAttribute("user",utente);
-					        disp = request.getRequestDispatcher (Pagename2);
-					    
-						}else {
-							error="Password non corretta";
+							String dbinput = rs.getString(PWD);
+							String encodedString = Base64.getEncoder().encodeToString(pwd.getBytes());
+							if(dbinput.equals(encodedString)) {
+								
+	
+								utente = new User(rs.getInt(ID),rs.getString(EMAIL),rs.getString(PWD),rs.getString(NOME),rs.getString(COGNOME),rs.getString(CF),rs.getDate(DATANASCITA),rs.getString(RUOLO)); 
+						        session = request.getSession(true);
+						        session.setAttribute("user",utente);
+						        disp = request.getRequestDispatcher (Pagename2);
+						    
+							}else {
+								error="Password non corretta";
+					       		request.setAttribute("Error", error);
+						    	disp = request.getRequestDispatcher (Pagename);
+							}
+				       	}else {
+				       		error="Account inesistente";
 				       		request.setAttribute("Error", error);
 					    	disp = request.getRequestDispatcher (Pagename);
-						}
-			       	}else {
-			       		error="Account inesistente";
+				       	}
+					}else {
+						error="Account inesistente";
 			       		request.setAttribute("Error", error);
 				    	disp = request.getRequestDispatcher (Pagename);
-			       	}
-					
+					}
 					
 				        
 			        
 			 }catch(Exception e) {
+			    	disp = request.getRequestDispatcher (Pagename);
 				e.printStackTrace(); 
 			 }finally {
 				 db.closeConnection(conn);
 			 }
 		}else {
+			error="Credenziali non inserite";
 			request.setAttribute("Error", error);
 	    	disp = request.getRequestDispatcher (Pagename);
 			

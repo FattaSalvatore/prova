@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class CredenzialiDB {
 	private Connection con;
-	private String QueryInsertCredenziali="Insert into test1_credenziali (email,pwd,ruolo) VALUES (?,?,?)";
+	private String QueryInsertCredenziali="Insert into test1_credenziali (email,pwd,iduser) VALUES (?,?,?)";
 	private String QueryDeleteCredenziali="DELETE FROM test1_credenziali WHERE email = ?";
 	private String QuerySelectCredenziali="Select * from test1_credenziali WHERE email = ?";
 	private String QueryUpdateCredenziali="Update test1_credenziali set  email=?, pwd=?, ruolo=? where email=?";
@@ -17,11 +17,11 @@ public class CredenzialiDB {
 		this.con = con;
 	}
 
-	public boolean insertCredenziali(String email, String pwd, int ruolo ) throws SQLException {
+	public boolean insertCredenziali(String email, String pwd,String id ) throws SQLException {
 		PreparedStatement prst = this.con.prepareStatement(QueryInsertCredenziali); //Preparazione dello statement
 		prst.setString(1, email);
 		prst.setString(2, pwd);
-		prst.setInt(3, ruolo);
+		prst.setInt(3, Integer.parseInt(id));
 		return prst.execute(); //esecuzione dello statement (ritorna true se andato a buon fine)
 	
 	}
