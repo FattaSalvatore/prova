@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="./style.css" rel="stylesheet" type="text/css">
-		<title>visualizza </title>
+		<title>Visualizza</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 		<link rel="stylesheet" href="./css/style.css">
@@ -38,13 +38,12 @@
 		
 			.my-custom-scrollbar {
 			position: relative;
-			height: 400px;
+			height: 300px;
 			overflow: auto;
 			}
 			.table-wrapper-scroll-y {
 			display: block;
 			}
-			;
 		</style>
 		<br><br>
 				<center>
@@ -60,7 +59,9 @@
 							<th>Data Revisione</th>
 							<th>Inizio Polizza</th>
 							<th>Fine Polizza</th>
-							<th>Modifica</th>
+							<c:if test="${ruolo == 'Admin' }">
+								<th>Modifica</th>
+							</c:if>
 						</tr>
 						<c:forEach var="a" items="${Lista}">
 						<tr>
@@ -72,6 +73,7 @@
 				    		<td>${a.datarevisione}</td>
 				    		<td> <fmt:formatDate type = "date" value = "${a.inizio_polizza}" /></td>
 				            <td> <fmt:formatDate type = "date" value = "${a.fine_polizza}" /></td>
+				            <c:if test="${ruolo == 'Admin' }">
 				            <td>
 				            <div class="w3-panel w3-center">
 				            	<form action="/Provawebapp/ModificaAuto" method="POST" >
@@ -86,6 +88,7 @@
 				            	</form>
 				            </div>
 				            </td>
+				            </c:if>
 				    	</tr>
 				    	</c:forEach>
 				   </div>
@@ -96,7 +99,6 @@
 						<center>
 						<th>
 						<h1>Tabella User</h1>
-					<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						<table class="w3-table-all w3-centered" style="width:60%">
 							<tr>
 								<th>Nome</th>
@@ -113,11 +115,8 @@
 					    	</tr>
 					    	</c:forEach>
 						</table>
-					</div>
 						</center>
 					</c:if>
-	<br></br>			
-	
 			<header class="w3-panel w3-center w3-opacity" style="padding:5px 5px">	
 		  		<div class="w3-padding-32">
 		      		<form action="/Provawebapp/Home">

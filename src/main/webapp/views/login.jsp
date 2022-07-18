@@ -38,7 +38,7 @@ form {
 }
 
 h1 {
-	padding: 50px;
+	padding: 30px;
 	text-align: center;
 	letter-spacing: 10px
 }
@@ -92,8 +92,11 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 }
 </style>
 
-
 	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color: #6666ff">AUTENTICAZIONE</h1>
+	<!-- MESSAGGIO DI ERRORE -->
+	<c:if test="${Error != null }">
+	<h1 class="w3-xlarge w3-xlargecolor w3-opacity" style="color: red"> ${Error } </h1> 
+	</c:if>
 	<div style="display: flex; align: center; justify-content: center">
 	<div class="w3-opacity box" style="display: flex; justify-content: center">
 	
