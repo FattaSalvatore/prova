@@ -38,7 +38,7 @@
 		<label for="idProprietario">Proprietario:</label><br>
 		<select id="proprietario" name="proprietario">
 			<c:forEach var = "p" items="${proprietari}">
-				<option value= "${p.cf }">${p.nome } ${p.cognome } ${p.cf }</option>
+				<option value="${p.cf }">${p.nome } ${p.cognome } ${p.cf }</option>
 			</c:forEach>
 		</select>
 		<br><br>
