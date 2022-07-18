@@ -60,7 +60,14 @@
 				<!-- TABLE AUTO -->
 				<center>
 					<h1>Tabella Auto</h1>
+				<c:choose>
+					<c:when test = "${ruolo == 'Admin' }">
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
+				</c:when>
+				<c:otherwise>
+					<div> 
+				</c:otherwise>
+				</c:choose>
 					<table class="w3-table-all w3-centered" style="width:70%" >
 				<tr>
 							<th>Marca</th>
