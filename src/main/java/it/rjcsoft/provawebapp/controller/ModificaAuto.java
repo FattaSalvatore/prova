@@ -27,6 +27,7 @@ public class ModificaAuto extends HttpServlet {
 	private static final String F_POLIZZA = "f_polizza";
 	private static final String ID = "id";
 	private static final String LOGIN = "./views/login.jsp";
+	private static final String ERRORPAGE = "./views/error.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -54,7 +55,7 @@ public class ModificaAuto extends HttpServlet {
 		String ruolo=cs.CheckSession();
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (LOGIN);
-		 }else {
+		 }else if(ruolo.equals("Admin")){
 			String marca = request.getParameter("marca");
 			String modello = request.getParameter("modello");
 			String prezzo =  request.getParameter("prezzo");
@@ -73,6 +74,9 @@ public class ModificaAuto extends HttpServlet {
 			request.setAttribute(I_POLIZZA, i_polizza);
 			request.setAttribute(F_POLIZZA, f_polizza);
 			request.setAttribute(ID, id);
+		 }else {
+			 disp = request.getRequestDispatcher(ERRORPAGE);
+			 request.setAttribute("Error", "Non sei autorizzato ad accedere a questa pagina");
 		 }
 		 disp.forward(request, response);
 	}
