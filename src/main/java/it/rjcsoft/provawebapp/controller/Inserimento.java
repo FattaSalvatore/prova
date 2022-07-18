@@ -51,9 +51,22 @@ public class Inserimento extends HttpServlet {
 			 disp = request.getRequestDispatcher (loginPage);
 		 }else {
 			 if(ruolo.equals("Admin")) {
+				 	UsersDB userdb = new UsersDB(conn);
 					
+					ArrayList<User> users = null;
+					try {
+						users = user.selectAllUsers();
+					} catch (SQLException e) {
+						
+						request.setAttribute("error", "Errore nel prelevare i dati degli utenti");
+						disp = request.getRequestDispatcher (errorPage); 
+					request.setAttribute("proprietari", users);
+					}finally {
+						db.closeConnection(conn);
+					}
 				    disp = request.getRequestDispatcher (Pagename);
 				 }else {
+					 
 					 request.setAttribute("error", "Non seri autorizzato ad accedere");
 					 disp = request.getRequestDispatcher (errorPage); 
 				 }
