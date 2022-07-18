@@ -60,10 +60,10 @@ public class Inserimento extends HttpServlet {
 						
 						request.setAttribute("error", "Errore nel prelevare i dati degli utenti");
 						disp = request.getRequestDispatcher (errorPage); 
-					request.setAttribute("proprietari", users);
 					}finally {
 						db.closeConnection(conn);
 					}
+					request.setAttribute("proprietari", users);
 				    disp = request.getRequestDispatcher (Pagename);
 				 }else {
 					 
