@@ -179,6 +179,7 @@ public class FormAutoServlet extends HttpServlet {
 							    }else {
 							    	disp = request.getRequestDispatcher (homePage);
 							    }
+							    
 						    }else {
 						    	errori+="La data di fine polizza è prima di inizio polizza \n";
 						    	request.setAttribute("Error", errori);
