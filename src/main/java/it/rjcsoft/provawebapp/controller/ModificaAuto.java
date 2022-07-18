@@ -52,7 +52,6 @@ public class ModificaAuto extends HttpServlet {
 		HttpSession session =request.getSession();
 		CheckSession cs= new CheckSession(session);
 		String ruolo=cs.CheckSession();
-		System.out.println("prova");
 		 if(ruolo == null) {
 			 disp = request.getRequestDispatcher (LOGIN);
 		 }else {
