@@ -57,7 +57,6 @@ public class Inserimento extends HttpServlet {
 					try {
 						users = user.selectAllUsers();
 					} catch (SQLException e) {
-						
 						request.setAttribute("error", "Errore nel prelevare i dati degli utenti");
 						disp = request.getRequestDispatcher (errorPage); 
 					}finally {

@@ -61,7 +61,7 @@ public class FormAutoServlet extends HttpServlet {
 		DBdriver db = DBdriver.getInstance();
 		Connection conn = db.openConnection();
 		
-		String error="";
+		String errori="";
 		
 		 RequestDispatcher disp = null;
 		 HttpSession session =request.getSession();
@@ -93,10 +93,10 @@ public class FormAutoServlet extends HttpServlet {
 				 	       datarevisione==null || datarevisione.isEmpty() ||
 				 	       inizio_polizza==null || inizio_polizza.isEmpty() ||
 				 	       fine_polizza==null || fine_polizza.isEmpty()){
-					    	
+					    	System.out.println("Qui ci entro cane delle belve");
 					    	disp = request.getRequestDispatcher (errorPage);
 					    	request.setAttribute("Error", "Errore, dati inseriti incorretti o mancanti");
-							disp.forward(request,response);
+							
 					    }else {
 					    	
 					    	marca=marca.trim();
@@ -109,7 +109,7 @@ public class FormAutoServlet extends HttpServlet {
 						    fine_polizza=fine_polizza.trim();
 						    Date datarevisione_cast=null;
 						    
-						    String errori="";
+						    
 						    
 						    int proprietario_casted=0;
 						   
@@ -170,7 +170,7 @@ public class FormAutoServlet extends HttpServlet {
 							    	errori+="Dati non insriti \n";
 								}
 							    
-							    if(errori!=null) {
+							    if(!errori.isEmpty()) {
 							    	request.setAttribute("Error", errori);
 							    	disp = request.getRequestDispatcher (errorPage);
 									
@@ -186,11 +186,11 @@ public class FormAutoServlet extends HttpServlet {
 						  
 						    
 						    db.closeConnection(conn);
-							disp.forward(request,response);
+							
 					    }
 				}else{
-					error="Non sei autorizzato ad accedere";
-		       		request.setAttribute("Error", error);
+					errori="Non sei autorizzato ad accedere";
+		       		request.setAttribute("Error", errori);
 			    	disp = request.getRequestDispatcher (errorPage);
 				}
 		 }

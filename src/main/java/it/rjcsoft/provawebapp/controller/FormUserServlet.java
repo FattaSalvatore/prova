@@ -145,7 +145,8 @@ public class FormUserServlet extends HttpServlet {
 								}
 							    
 							   
-							    if(error.isEmpty()) {
+							    if(!error.isEmpty()) {
+							    	System.out.println();
 							    	request.setAttribute("Error", error);
 							    	disp = request.getRequestDispatcher (errorPage);
 									
